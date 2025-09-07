@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login & Register</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <!-- Card -->
+        <div class="card shadow-lg border-0 rounded-4">
+               <h1 class="text-center my-4">Staff</h1>
+          <div class="card-body p-4">
+
+            <!-- Nav Tabs -->
+            <ul class="nav nav-tabs mb-4 justify-content-center" id="authTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button"
+                  role="tab">Sign In</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button"
+                  role="tab">Sign Up</button>
+              </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="authTabsContent">
+
+              <!-- Login Form -->
+              <div class="tab-pane fade show active" id="login" role="tabpanel">
+                <form action="/login" method="POST">
+                  <div class="mb-3">
+                    <label for="login-user" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="login-user" name="username" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="login-pass" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="login-pass" name="password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                </form>
+              </div>
+
+              <!-- Register Form -->
+              <div class="tab-pane fade" id="register" role="tabpanel">
+                <form action="/register" method="POST">
+                  <div class="mb-3">
+                    <label for="signup-user" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="signup-user" name="username" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-restaurantname" class="form-label">Restaurant Name</label>
+                    <input type="text" class="form-control" id="signup-restaurantname" name="restaurantname">
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-pass" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signup-pass" name="password" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-repeat-pass" class="form-label">Repeat Password</label>
+                    <input type="password" class="form-control" id="signup-repeat-pass" name="repeat_password" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="signup-email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="signup-email" name="email" required>
+                  </div>
+                  <button type="submit" class="btn btn-success w-100">Sign Up</button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
