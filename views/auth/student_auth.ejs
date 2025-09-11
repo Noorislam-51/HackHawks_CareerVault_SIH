@@ -4,91 +4,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login & Register</title>
+  <title>Student Portal - Login & Registration</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/auth.css">
 </head>
 
-<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+<body>
+  <div class="container-fluid">
+    <!-- Back to Home Button -->
+    <div class="text-center mb-3">
+      <a href="/" class="back-btn">
+        <i class="bi bi-house"></i> Back to Home
+      </a>
+    </div>
 
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
+    <!-- Flip Card -->
+    <div class="flip-container">
+      <div class="flip-card" id="flipCard">
 
-        <!-- Card -->
-        <div class="card shadow-lg border-0 rounded-4">
-          <h1 class="text-center my-4">Student</h1>
+        <!-- LOGIN -->
+        <div class="flip-card-front">
+          <div class="card-icon"><i class="bi bi-mortarboard"></i></div>
+          <h2 class="card-title">Student Login</h2>
+          <p class="card-subtitle">Access your student portal</p>
 
-          <div class="card-body p-4">
 
-            <!-- Nav Tabs -->
-            <ul class="nav nav-tabs mb-4 justify-content-center" id="authTabs" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button"
-                  role="tab">Sign In</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button"
-                  role="tab">Sign Up</button>
-              </li>
-            </ul>
-
-            <!-- Tab Content -->
-            <div class="tab-content" id="authTabsContent">
-
-              <!-- Login Form -->
-              <div class="tab-pane fade show active" id="login" role="tabpanel">
-                <form action="/login" method="POST">
-                  <div class="mb-3">
-                    <label for="login-user" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="login-user" name="username" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="login-pass" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="login-pass" name="password" required>
-                  </div>
-                  <button type="submit" class="btn btn-primary w-100">Sign In</button>
-                </form>
-              </div>
-
-              <!-- Register Form -->
-              <div class="tab-pane fade" id="register" role="tabpanel">
-                <form action="/register" method="POST">
-                  <div class="mb-3">
-                    <label for="signup-user" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="signup-user" name="username" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="signup-restaurantname" class="form-label">Restaurant Name</label>
-                    <input type="text" class="form-control" id="signup-restaurantname" name="restaurantname">
-                  </div>
-                  <div class="mb-3">
-                    <label for="signup-pass" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="signup-pass" name="password" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="signup-repeat-pass" class="form-label">Repeat Password</label>
-                    <input type="password" class="form-control" id="signup-repeat-pass" name="repeat_password" required>
-                  </div>
-                  <div class="mb-3">
-                    <label for="signup-email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="signup-email" name="email" required>
-                  </div>
-                  <button type="submit" class="btn btn-success w-100">Sign Up</button>
-                </form>
-              </div>
-
+          <form action="/login/student" method="POST">
+            <div class="mb-3">
+              <label for="studentId" class="form-label">Student Id</label>
+              <!-- FIXED name to match passport usernameField -->
+              <input type="text" class="form-control" id="studentId" name="studentId" required>
             </div>
-          </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">Password</label>
+              <div class="password-input">
+                <input type="password" class="form-control" id="loginPassword" name="password" required>
+                <button type="button" class="password-toggle" onclick="togglePassword('loginPassword')">
+                  <i class="bi bi-eye" id="loginPasswordIcon"></i>
+                </button>
+              </div>
+            </div>
+            <div class="forgot-password">
+              <a href="/forgot-password/student">Forgot Password?</a>
+            </div>
+            <button type="submit" class="action-btn">Login to Portal</button>
+            <div class="switch-link">New student? <button type="button" onclick="flipCard()">Register here</button>
+            </div>
+          </form>
         </div>
-        <!-- End Card -->
 
+
+        <!-- REGISTER -->
+        <div class="flip-card-back">
+          <div class="card-icon"><i class="bi bi-person-plus-fill"></i></div>
+          <h2 class="card-title">Student Registration</h2>
+          <p class="card-subtitle">Create your student account</p>
+
+          <form action="/register/student" method="POST">
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="fullName" name="fullName" required>
+            </div>
+            <div class="mb-3">
+              <label for="studentId" class="form-label">Student Id</label>
+              <input type="text" class="form-control" id="studentId" name="studentId" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="collegeId" class="form-label">College</label>
+              <select class="form-select" id="collegeId" name="collegeId" required>
+                <option value="">Select your college</option>
+                <option value="JMI">Jamia Millia Islamia (JMI)</option>
+                <option value="AMU">Aligarh Muslim University (AMU)</option>
+                <option value="DU">Delhi University (DU)</option>
+                <option value="JNU">Jawaharlal Nehru University (JNU)</option>
+              </select>
+            </div>
+            <!-- <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number (optional)</label>
+              <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div> -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <div class="password-input">
+                <input type="password" class="form-control" id="password" name="password" required>
+                <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                  <i class="bi bi-eye" id="passwordIcon"></i>
+                </button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <div class="password-input">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                  <i class="bi bi-eye" id="confirmPasswordIcon"></i>
+                </button>
+              </div>
+            </div>
+            <button type="submit" class="action-btn">Create Student Account</button>
+            <div class="switch-link">Already have an account? <button type="button" onclick="flipCard()">Login
+                here</button></div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function flipCard() {
+      document.getElementById('flipCard').classList.toggle('flipped');
+    }
 
+    function togglePassword(inputId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(inputId + 'Icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.className = 'bi bi-eye-slash';
+      } else {
+        input.type = 'password';
+        icon.className = 'bi bi-eye';
+      }
+    }
+
+    document.getElementById('confirmPassword').addEventListener('input', function () {
+      if (this.value !== document.getElementById('password').value) {
+        this.setCustomValidity('Passwords do not match');
+      } else {
+        this.setCustomValidity('');
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
