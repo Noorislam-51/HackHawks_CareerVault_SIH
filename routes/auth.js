@@ -2,19 +2,22 @@ var express = require('express');
 var router = express.Router();
 const passport = require("passport");
 const studentModel = require('../models/StudentDB');
+const staffModel = require('../models/StaffDB');
 const localStrategy = require("passport-local");
-passport.use(new localStrategy({
-  usernameField: 'studentId'  // Make sure this matches your schema
-}, studentModel.authenticate()));
 
-// authentication------------------
+// Student strategy
+passport.use(new localStrategy({
+  usernameField: 'studentId'  
+}, studentModel.authenticate()));
+// Staff strategy
+passport.use("staff-local", new localStrategy(
+  { usernameField: "staffId" }, 
+  staffModel.authenticate()
+));
+
+// student register------------------
 router.post("/register/student", async (req, res) => {
   const { studentId, collegeId, email, fullName, password } = req.body;
-
-  if (!studentId || !collegeId || !email || !fullName || !password) {
-    console.log("Missing required fields");
-    return res.status(400).send("All required fields must be filled");
-  }
 
   try {
     const newStudent = new studentModel({
@@ -31,8 +34,36 @@ router.post("/register/student", async (req, res) => {
         return res.status(400).send(err.message);
       }
 
-      passport.authenticate("local")(req, res, function () {
-        res.redirect("/view");
+      passport.authenticate("student-local")(req, res, function () {
+        res.redirect("/student/edit");
+      });
+    });
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    res.status(500).send("Server error");
+  }
+});
+// Register Staff-------------------------------
+router.post("/register/staff", async (req, res) => {
+  const { staffId, collegeId, email, fullName, password,designation } = req.body;
+
+  try {
+    const newStaff = new staffModel({
+      staffId,
+      fullName,
+      email,
+      collegeId,
+      designation
+    });
+
+    staffModel.register(newStaff, password, function (err, user) {
+      if (err) {
+        console.log("Staff Registration error:", err);
+        return res.status(400).send(err.message);
+      }
+
+      passport.authenticate("staff-local")(req, res, function () {
+        res.redirect("/student/edit");
       });
     });
   } catch (err) {
@@ -42,12 +73,20 @@ router.post("/register/student", async (req, res) => {
 });
 
 
-// login ---------------
+
+// student login ---------------
 router.post("/login/student", passport.authenticate("local", {
-  successRedirect: "/view",
+  successRedirect: "/student/edit",
   failureRedirect: "/",
   failureFlash: true
 }), function (req, res) { });
+// Staff login----------------
+router.post("/login/staff", passport.authenticate("staff-local", {
+  successRedirect: "/student/edit",
+  failureRedirect: "/",
+  failureFlash: true
+}), function (req, res) { });
+
 
 // logout----------
 router.get("/logout", function (req, res, next) {

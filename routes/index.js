@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const isLoggedIn = require('../middleware/isLoggedIn') 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -17,8 +17,12 @@ router.get('/login/staff', function(req, res, next) {
 });
 
 // view
-router.get('/view', function(req, res, next) {
-  res.render('./student/view.ejs', { title: 'Student Dashboard' });
+// router.get('/student/edit',isLoggedIn, function(req, res, next) {
+//   res.render('./student/studentEdit', { title: 'Student Dashboard' });
+// });
+router.get('/student/edit', function(req, res, next) {
+  res.render('./student/studentEdit', { title: 'Student Dashboard' });
 });
+
 
 module.exports = router;

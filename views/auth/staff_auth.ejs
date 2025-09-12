@@ -31,10 +31,10 @@
           <h2 class="card-title">Staff Login</h2>
           <p class="card-subtitle">Access your staff portal</p>
 
-          <form action="/staff/login" method="POST">
-            <div class="mb-3">
-              <label for="staffEmail" class="form-label">Official Email</label>
-              <input type="email" class="form-control" id="staffEmail" name="email" required>
+          <form action="/login/staff" method="POST">
+             <div class="mb-3">
+              <label for="staffId" class="form-label">Staff ID</label>
+              <input type="text" class="form-control" id="staffId" name="staffId" required>
             </div>
             <div class="mb-3">
               <label for="staffPassword" class="form-label">Password</label>
@@ -56,14 +56,14 @@
           <h2 class="card-title">Staff Registration</h2>
           <p class="card-subtitle">Create your staff account</p>
 
-          <form action="/staff/register" method="POST">
+          <form action="/register/staff" method="POST">
             <div class="mb-3">
               <label for="fullName" class="form-label">Full Name</label>
               <input type="text" class="form-control" id="fullName" name="fullName" required>
             </div>
             <div class="mb-3">
-              <label for="employeeId" class="form-label">Employee ID</label>
-              <input type="text" class="form-control" id="employeeId" name="employeeId" required>
+              <label for="staffId" class="form-label">Staff ID</label>
+              <input type="text" class="form-control" id="staffId" name="staffId" required>
             </div>
             <div class="mb-3">
               <label for="designation" class="form-label">Designation / Role</label>
@@ -90,10 +90,7 @@
                 <option value="WEST">West Campus</option>
               </select>
             </div>
-            <div class="mb-3">
-              <label for="phone" class="form-label">Phone Number</label>
-              <input type="tel" class="form-control" id="phone" name="phone" required>
-            </div>
+           
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <div class="password-input">

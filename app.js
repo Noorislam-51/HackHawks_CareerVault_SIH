@@ -14,7 +14,7 @@ const authRouter = require('./routes/auth');
 
 // Import Student model
 const studentModel = require('./models/StudentDB'); 
-
+const staffModel = require('./models/StaffDB');
 
 var app = express();
 
@@ -34,9 +34,36 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Passport serialize/deserialize (using StudentModel from passport-local-mongoose)
-passport.serializeUser(studentModel.serializeUser());
-passport.deserializeUser(studentModel.deserializeUser());
+// // Passport serialize/deserialize (using StudentModel from passport-local-mongoose)
+// passport.serializeUser(studentModel.serializeUser());
+// passport.deserializeUser(studentModel.deserializeUser());
+
+
+// ----------------- STRATEGIES -----------------
+// Student strategy
+passport.use('student-local', studentModel.createStrategy());
+
+// Staff strategy
+passport.use('staff-local', staffModel.createStrategy());
+
+// Serialize / Deserialize
+passport.serializeUser(function (user, done) {
+  done(null, { id: user.id, type: user.staffId ? 'staff' : 'student' });
+});
+
+passport.deserializeUser(async function (obj, done) {
+  try {
+    if (obj.type === 'student') {
+      const student = await studentModel.findById(obj.id);
+      return done(null, student);
+    } else {
+      const staff = await staffModel.findById(obj.id);
+      return done(null, staff);
+    }
+  } catch (err) {
+    return done(err, null);
+  }
+});
 
 // Middleware
 app.use(logger('dev'));
