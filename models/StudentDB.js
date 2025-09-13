@@ -33,7 +33,7 @@ const studentSchema = new mongoose.Schema({
     dob: { type: Date },             // optional if not in form
     course: { type: String },        // optional if not in form
     year: { type: Number },          // optional if not in form
-    contactNumber: { type: String },
+    contact: { type: String },
     address: { type: String }         // optional if not in form
   },
   // skills: { type: [String], default: [] },

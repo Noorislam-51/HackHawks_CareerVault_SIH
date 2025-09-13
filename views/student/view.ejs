@@ -4,15 +4,411 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>DocuVault - John Doe</title>
+  <link rel="stylesheet" href="/stylesheets/studentDashboard.css">
 </head>
 
 <body>
-  <h1>hello hidshfakjdhsfkjhakn</h1>
-  <form action="/logout" method="get" style="display:inline;">
-    <button type="submit" class="btn btn-danger">Logout</button>
-  </form>
+  <div class="container">
+    
 
+    <div class="profile-container">
+        <!-- Header with gradient background -->
+        <div class="profile-header">
+            <button class="edit-details-btn" onclick="openEditModal()">
+                📝 Edit Details
+            </button>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Profile Top Section -->
+            <div class="profile-top">
+                <div class="avatar" id="avatar">JD</div>
+                <div class="profile-info">
+                    <h1 class="profile-name" id="profile-name">John Doe</h1>
+                    <div class="profile-meta">
+                        <span># Roll No: <span id="profile-roll">12345</span></span>
+                        <span>👁️ <span id="profile-college">JMI</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Details Grid -->
+            <div class="profile-details">
+                <!-- Left Column -->
+                <div class="details-left">
+                    <div class="detail-item">
+                        <div class="detail-icon">🎓</div>
+                        <div class="detail-content">
+                            <div class="detail-label">Course</div>
+                            <div class="detail-value" id="profile-course">B.Tech CSE</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-icon">📅</div>
+                        <div class="detail-content">
+                            <div class="detail-label">Year</div>
+                            <div class="detail-value" id="profile-year">3rd Year</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-icon">📅</div>
+                        <div class="detail-content">
+                            <div class="detail-label">Date of Birth</div>
+                            <div class="detail-value" id="profile-dob">2002-06-15</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="details-right">
+                    <div class="detail-item">
+                        <div class="detail-icon">✉️</div>
+                        <div class="detail-content">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value" id="profile-email">johndoe@example.com</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-icon">📞</div>
+                        <div class="detail-content">
+                            <div class="detail-label">Contact</div>
+                            <div class="detail-value" id="profile-contact">9876543210</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-item">
+                        <div class="detail-icon">📍</div>
+                        <div class="detail-content">
+                            <div class="detail-label">Address</div>
+                            <div class="detail-value" id="profile-address">Noida, Uttar Pradesh</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="skills-section">
+                <h3 class="skills-title">Skills</h3>
+                <div class="skills-container" id="profile-skills">
+                    <span class="skill-tag skill-javascript">JavaScript</span>
+                    <span class="skill-tag skill-react">React</span>
+                    <span class="skill-tag skill-python">Python</span>
+                    <span class="skill-tag skill-ml">Machine Learning</span>
+                    <span class="skill-tag skill-nodejs">Node.js</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-primary">
+                    📄 Resume Builder
+                </button>
+                <button class="btn btn-secondary">
+                    ⬇️ Download Resume
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs">
+      <a href="#" class="tab active">📄 Documents</a>
+      <a href="#" class="tab">🏢 Internships</a>
+      <a href="#" class="tab">📅 Attendance</a>
+      <a href="#" class="tab">📊 Marksheet</a>
+      <a href="#" class="tab">👥 Community</a>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="quick-stats">
+      <div class="stat-card pending">
+        <div class="stat-number">4</div>
+        <span>⏳ Pending Documents</span>
+      </div>
+      <div class="stat-card schedule">
+        <span>📋 Schedule Review</span>
+      </div>
+    </div>
+
+    <!-- Document Management Section -->
+    <div class="document-section">
+      <h2 class="section-title">Document Management</h2>
+      <p class="section-subtitle">Organize and track your academic documents</p>
+
+      <div class="document-grid">
+        <!-- Academic Documents -->
+        <div class="doc-card">
+          <div class="view-icon">👁️</div>
+          <div class="doc-header">
+            <div class="doc-icon academic">📚</div>
+            <div class="doc-title">Academic</div>
+          </div>
+          <div class="doc-stats">
+            <div class="doc-stat">
+              <div class="stat-dot green"></div><span>5</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot yellow"></div><span>2</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot red"></div><span>1</span>
+            </div>
+          </div>
+          <button class="add-doc-btn">➕ Add Document</button>
+        </div>
+
+        <!-- Internships -->
+        <div class="doc-card">
+          <div class="view-icon">👁️</div>
+          <div class="doc-header">
+            <div class="doc-icon internships">🏢</div>
+            <div class="doc-title">Internships</div>
+          </div>
+          <div class="doc-stats">
+            <div class="doc-stat">
+              <div class="stat-dot green"></div><span>3</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot yellow"></div><span>1</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot red"></div><span>0</span>
+            </div>
+          </div>
+          <button class="add-doc-btn">➕ Add Document</button>
+        </div>
+
+        <!-- Extracurricular -->
+        <div class="doc-card">
+          <div class="view-icon">👁️</div>
+          <div class="doc-header">
+            <div class="doc-icon extracurricular">🎯</div>
+            <div class="doc-title">Extracurricular</div>
+          </div>
+          <div class="doc-stats">
+            <div class="doc-stat">
+              <div class="stat-dot green"></div><span>2</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot yellow"></div><span>0</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot red"></div><span>1</span>
+            </div>
+          </div>
+          <button class="add-doc-btn">➕ Add Document</button>
+        </div>
+
+        <!-- Certificates -->
+        <div class="doc-card">
+          <div class="view-icon">👁️</div>
+          <div class="doc-header">
+            <div class="doc-icon certificates">🏆</div>
+            <div class="doc-title">Certificates</div>
+          </div>
+          <div class="doc-stats">
+            <div class="doc-stat">
+              <div class="stat-dot green"></div><span>6</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot yellow"></div><span>1</span>
+            </div>
+            <div class="doc-stat">
+              <div class="stat-dot red"></div><span>0</span>
+            </div>
+          </div>
+          <button class="add-doc-btn">➕ Add Document</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overview Statistics -->
+    <div class="overview-stats">
+      <div class="overview-stat">
+        <div class="stat-value verified">16</div>
+        <div class="stat-label">Verified Documents</div>
+      </div>
+      <div class="overview-stat">
+        <div class="stat-value pending">4</div>
+        <div class="stat-label">Pending Review</div>
+      </div>
+      <div class="overview-stat">
+        <div class="stat-value total">20</div>
+        <div class="stat-label">Total Documents</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Edit Student Details</h2>
+        <button class="close-btn" onclick="closeEditModal()">×</button>
+      </div>
+
+      <p class="modal-subtitle">Make changes to your profile information here. Click save when you're done.</p>
+
+      <form id="editForm">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-input" id="edit-name" value="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Roll No</label>
+          <input type="text" class="form-input" id="edit-roll" value="12345">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Course</label>
+          <input type="text" class="form-input" id="edit-course" value="B.Tech CSE">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Year</label>
+          <input type="text" class="form-input" id="edit-year" value="3rd Year">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="edit-email" value="johndoe@example.com">
+        </div>
+
+        <div class="skills-section">
+          <label class="form-label">Skills</label>
+          <div class="skills-input-container">
+            <input type="text" class="form-input" id="skill-input" placeholder="Add a skill">
+            <button type="button" class="add-skill-btn" onclick="addSkill()">+</button>
+          </div>
+          <div class="modal-skills-tags" id="modal-skills">
+            <div class="modal-skill-tag">
+              JavaScript <button type="button" class="remove-skill" onclick="removeSkill(this)">×</button>
+            </div>
+            <div class="modal-skill-tag">
+              Node.js <button type="button" class="remove-skill" onclick="removeSkill(this)">×</button>
+            </div>
+            <div class="modal-skill-tag">
+              React <button type="button" class="remove-skill" onclick="removeSkill(this)">×</button>
+            </div>
+            <div class="modal-skill-tag">
+              MongoDB <button type="button" class="remove-skill" onclick="removeSkill(this)">×</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+          <button type="button" class="btn-save" onclick="saveChanges()">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Modal functions
+    function openEditModal() {
+      document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('editModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeEditModal();
+      }
+    });
+
+    // Add skill function
+    function addSkill() {
+      const skillInput = document.getElementById('skill-input');
+      const skillValue = skillInput.value.trim();
+
+      if (skillValue) {
+        const modalSkills = document.getElementById('modal-skills');
+        const skillTag = document.createElement('div');
+        skillTag.className = 'modal-skill-tag';
+        skillTag.innerHTML = `
+          ${skillValue} <button type="button" class="remove-skill" onclick="removeSkill(this)">×</button>
+        `;
+        modalSkills.appendChild(skillTag);
+        skillInput.value = '';
+      }
+    }
+
+    // Remove skill function
+    function removeSkill(button) {
+      button.parentElement.remove();
+    }
+
+    // Allow Enter key to add skill
+    document.getElementById('skill-input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addSkill();
+      }
+    });
+
+    // Save changes function
+    function saveChanges() {
+      const name = document.getElementById('edit-name').value;
+      const roll = document.getElementById('edit-roll').value;
+      const course = document.getElementById('edit-course').value;
+      const year = document.getElementById('edit-year').value;
+      const email = document.getElementById('edit-email').value;
+
+      // Update profile information
+      document.getElementById('profile-name').textContent = name;
+      document.getElementById('profile-roll').textContent = roll;
+      document.getElementById('profile-course').textContent = course;
+      document.getElementById('profile-year').textContent = year;
+      document.getElementById('profile-email').textContent = email;
+
+      // Update avatar
+      const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+      document.getElementById('avatar').textContent = initials;
+
+      // Update skills
+      const modalSkills = document.querySelectorAll('#modal-skills .modal-skill-tag');
+      const profileSkills = document.getElementById('profile-skills');
+      profileSkills.innerHTML = '';
+
+      modalSkills.forEach(skill => {
+        const skillName = skill.textContent.replace('×', '').trim();
+        const skillTag = document.createElement('span');
+        skillTag.className = 'skill-tag';
+        skillTag.textContent = skillName;
+        profileSkills.appendChild(skillTag);
+      });
+
+      closeEditModal();
+    }
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Button handlers
+    document.querySelectorAll('.add-doc-btn').forEach(btn => {
+      btn.addEventListener('click', () => alert('Add document clicked'));
+    });
+
+    document.querySelector('.btn-primary').addEventListener('click', () => alert('Resume builder clicked'));
+    document.querySelector('.btn-secondary').addEventListener('click', () => alert('Download resume clicked'));
+  </script>
 </body>
 
 </html>

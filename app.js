@@ -11,6 +11,7 @@ const expressSession = require("express-session");
 // Import routers
 var indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const studentRouter = require('./routes/student');
 
 // Import Student model
 const studentModel = require('./models/StudentDB'); 
@@ -75,6 +76,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/', indexRouter);
 app.use('/', authRouter);
+app.use('/', studentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

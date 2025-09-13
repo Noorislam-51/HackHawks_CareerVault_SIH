@@ -20,9 +20,6 @@ router.get('/login/staff', function(req, res, next) {
 // router.get('/student/edit',isLoggedIn, function(req, res, next) {
 //   res.render('./student/studentEdit', { title: 'Student Dashboard' });
 // });
-router.get('/student/edit', function(req, res, next) {
-  res.render('./student/studentEdit', { title: 'Student Dashboard' });
-});
 
 
 module.exports = router;
