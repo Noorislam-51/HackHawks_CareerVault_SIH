@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- Document Management Section -->
+  <div class="document-section">
+    <h2 class="section-title">Document Management</h2>
+    <p class="section-subtitle">Organize and track your academic documents</p>
+
+    <div class="document-grid">
+
+      <!-- 1. Academic Achievements -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon academic">📚</div>
+          <div class="doc-title">Academic</div>
+        </div>
+        <div class="doc-stats"><span class="green">5</span><span class="yellow">2</span><span class="red">1</span></div>
+        <div class="doc-subtypes"><span>Mark sheets, Degree, Merit, Research</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('academic_achievements')">➕ Add</button>
+      </div>
+
+      <!-- 2. Conferences & Workshops -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon conferences">🎤</div>
+          <div class="doc-title">Conferences</div>
+        </div>
+        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
+        <div class="doc-subtypes"><span>Participation, Presentation, Attendance</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('conferences_workshops')">➕ Add</button>
+      </div>
+
+      <!-- 3. Certifications Earned -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon certificates">🏆</div>
+          <div class="doc-title">Certificates</div>
+        </div>
+        <div class="doc-stats"><span class="green">6</span><span class="yellow">1</span><span class="red">0</span></div>
+        <div class="doc-subtypes"><span>Online, Industry, Skill</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('certifications_earned')">➕ Add</button>
+      </div>
+
+      <!-- 4. Club Activities & Volunteering -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon extracurricular">🎯</div>
+          <div class="doc-title">Clubs & Volunteering</div>
+        </div>
+        <div class="doc-stats"><span class="green">2</span><span class="yellow">0</span><span class="red">1</span></div>
+        <div class="doc-subtypes"><span>Participation, Volunteering, Letters</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('club_activities_volunteering')">➕ Add</button>
+      </div>
+
+      <!-- 5. Competitions & Contests -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon competitions">🏅</div>
+          <div class="doc-title">Competitions</div>
+        </div>
+        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
+        <div class="doc-subtypes"><span>Participation, Medals, News</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('competitions_contests')">➕ Add</button>
+      </div>
+
+      <!-- 6. Leadership Roles & Internships -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon internships">🏢</div>
+          <div class="doc-title">Leadership & Internships</div>
+        </div>
+        <div class="doc-stats"><span class="green">3</span><span class="yellow">1</span><span class="red">0</span></div>
+        <div class="doc-subtypes"><span>Appointments, Internships, Recommendations</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('leadership_roles_internships')">➕ Add</button>
+      </div>
+
+      <!-- 7. Community Services -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon community">🤝</div>
+          <div class="doc-title">Community</div>
+        </div>
+        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
+        <div class="doc-subtypes"><span>Certificates, Appreciation, Proofs</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('community_services')">➕ Add</button>
+      </div>
+
+      <!-- 8. General Supporting Documents -->
+      <div class="doc-card">
+        <div class="view-icon">👁️</div>
+        <div class="doc-header">
+          <div class="doc-icon general">🗂️</div>
+          <div class="doc-title">Supporting Docs</div>
+        </div>
+        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
+        <div class="doc-subtypes"><span>Resume, ID, Recommendation</span></div>
+        <button class="add-doc-btn" onclick="openDocModal('general_supporting_documents')">➕ Add</button>
+      </div>
+
+    </div>
+
+    <!-- Upload Document Modal -->
+    <div class="modal-overlay" id="docModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 class="modal-title">Upload Document</h2>
+          <button class="close-btn" onclick="closeDocModal()">×</button>
+        </div>
+
+        <form action="/upload-doc" method="POST" enctype="multipart/form-data">
+          <!-- Student ID -->
+          <input type="hidden" name="studentId" value="<%= student.studentId %>">
+
+          <!-- Category maps to "type" field in PendingDocument -->
+          <input type="hidden" id="categoryInput" name="type">
+
+          <!-- Title -->
+          <div class="form-group">
+            <label for="title">Document Title</label>
+            <input type="text" name="title" id="title" required>
+          </div>
+
+          <!-- File Upload -->
+          <div class="form-group">
+            <label for="file">Upload File</label>
+            <input type="file" name="file" id="file" accept=".pdf" required>
+          </div>
+
+          <!-- Modal Actions -->
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" onclick="closeDocModal()">Cancel</button>
+            <button type="submit" class="btn-save">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- Overview Statistics -->
+    <div class="overview-stats">
+      <div class="overview-stat">
+        <div class="stat-value verified">16</div>
+        <div class="stat-label">Verified Documents</div>
+      </div>
+      <div class="overview-stat">
+        <div class="stat-value pending">4</div>
+        <div class="stat-label">Pending Review</div>
+      </div>
+      <div class="overview-stat">
+        <div class="stat-value total">20</div>
+        <div class="stat-label">Total Documents</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+
+  <script>
+    function openDocModal(category) {
+      document.getElementById('docModal').style.display = 'block';
+      document.getElementById('categoryInput').value = category;
+    }
+
+    function closeDocModal() {
+      document.getElementById('docModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('docModal').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeDocModal();
+      }
+    });
+  </script>
+</body>
+
+</html>
