@@ -236,6 +236,7 @@
  .tabs {
    display: flex;
    gap: 2rem;
+   justify-content: center;
    margin-bottom: 2rem;
    border-bottom: 2px solid #e5e7eb;
  }
@@ -263,11 +264,7 @@
    background: #6366f1;
  }
 
- .quick-stats {
-   display: flex;
-   gap: 1rem;
-   margin-bottom: 2rem;
- }
+
 
  .stat-card {
    background: white;
