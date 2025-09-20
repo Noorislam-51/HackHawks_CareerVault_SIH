@@ -1,4 +1,4 @@
-const express = require("express");
+  const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const PendingDocument = require("../models/PendingDocumentDB");
@@ -46,5 +46,6 @@ router.post("/upload-doc", upload.single("file"), async (req, res) => {
     res.status(500).send("Error uploading document");
   }
 });
+
 
 module.exports = router;

@@ -17,7 +17,8 @@
 
       <!-- 1. Academic Achievements -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('academic_achievements')">👁️</div>
+        <!-- <div class="view-icon">👁️</div> -->
         <div class="doc-header">
           <div class="doc-icon academic">📚</div>
           <div class="doc-title">Academic</div>
@@ -29,7 +30,7 @@
 
       <!-- 2. Conferences & Workshops -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('conferences_workshops')">👁️</div>
         <div class="doc-header">
           <div class="doc-icon conferences">🎤</div>
           <div class="doc-title">Conferences</div>
@@ -41,7 +42,7 @@
 
       <!-- 3. Certifications Earned -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('certifications_earned')">👁️</div>
         <div class="doc-header">
           <div class="doc-icon certificates">🏆</div>
           <div class="doc-title">Certificates</div>
@@ -53,7 +54,7 @@
 
       <!-- 4. Club Activities & Volunteering -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('club_activities_volunteering')">👁️</div>
         <div class="doc-header">
           <div class="doc-icon extracurricular">🎯</div>
           <div class="doc-title">Clubs & Volunteering</div>
@@ -65,7 +66,7 @@
 
       <!-- 5. Competitions & Contests -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('competitions_contests')">👁️</div>
         <div class="doc-header">
           <div class="doc-icon competitions">🏅</div>
           <div class="doc-title">Competitions</div>
@@ -77,7 +78,7 @@
 
       <!-- 6. Leadership Roles & Internships -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('leadership_roles_internships')">👁️</div>
         <div class="doc-header">
           <div class="doc-icon internships">🏢</div>
           <div class="doc-title">Leadership & Internships</div>
@@ -89,7 +90,7 @@
 
       <!-- 7. Community Services -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('community_services')">👁️</div>
         <div class="doc-header">
           <div class="doc-icon community">🤝</div>
           <div class="doc-title">Community</div>
@@ -101,7 +102,7 @@
 
       <!-- 8. General Supporting Documents -->
       <div class="doc-card">
-        <div class="view-icon">👁️</div>
+        <div class="view-icon" onclick="openPendingDocsModal('general_supporting_documents')">👁️</div>
         <div class="doc-header">
           <div class="doc-icon general">🗂️</div>
           <div class="doc-title">Supporting Docs</div>
@@ -157,7 +158,7 @@
         <div class="stat-label">Verified Documents</div>
       </div>
       <div class="overview-stat">
-        <div class="stat-value pending">4</div>
+        <div class="stat-value pending"><%= pendingCount %></div>
         <div class="stat-label">Pending Review</div>
       </div>
       <div class="overview-stat">
@@ -167,9 +168,52 @@
     </div>
   </div>
 
-  <!-- Edit Modal -->
+
+  <!-- Pending Documents Modal -->
+  <div class="pending-docs-overlay" id="pendingDocsModal">
+    <div class="pending-docs-modal">
+      <div class="pending-docs-header">
+        <h2 class="pending-docs-title">Pending Documents</h2>
+        <button class="pending-docs-close-btn" onclick="closePendingDocsModal()">×</button>
+      </div>
+
+      <div class="pending-docs-container">
+        <% if (!pendingDocs || pendingDocs.length===0) { %>
+          <p class="pending-docs-no-docs">No pending documents.</p>
+          <% } else { %>
+            <% pendingDocs.map(doc=> { %>
+              <div class="pending-doc-card">
+                <div class="pending-doc-info">
+                  <h3>
+                    <%= doc.title %>
+                  </h3>
+                  <p>Type: <%= doc.type %>
+                  </p>
+                  <p>Uploaded: <%= new Date(doc.upload_date).toLocaleDateString() %>
+                  </p>
+                  <% if (doc.staff_comments) { %>
+                    <p class="pending-doc-comments">Comments: <%= doc.staff_comments %>
+                    </p>
+                    <% } %>
+                </div>
+                <a href="<%= doc.file_url %>" target="_blank" class="pending-doc-view-btn">View</a>
+              </div>
+              <% }) %>
+                <% } %>
+      </div>
+    </div>
+  </div>
+
+
 
   <script>
+    function closePendingDocsModal() {
+      document.getElementById("pendingDocsModal").style.display = "none";
+    }
+
+    function openPendingDocsModal() {
+      document.getElementById("pendingDocsModal").style.display = "flex";
+    }
     function openDocModal(category) {
       document.getElementById('docModal').style.display = 'block';
       document.getElementById('categoryInput').value = category;

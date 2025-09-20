@@ -1,0 +1,10 @@
+/* Profile Header */
+.profile-header {
+  background: linear-gradient(135deg, #f0ffda, hsl(67, 87%, 57%));
+  height: 120px;
+  display: flex;
+  justify-content: flex-end; /* aligns buttons to the right */
+  align-items: center;       /* vertically centers buttons */
+  gap: 12px;                 /* space between buttons */
+  padding-right: 20px;       /* distance from right edge */
+}

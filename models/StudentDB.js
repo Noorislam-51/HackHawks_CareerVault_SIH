@@ -1,3 +1,7 @@
+// Client ID: 86fvbnkhlwjcr7
+
+
+
 const mongoose = require("mongoose");
 const plm = require("passport-local-mongoose");
 
@@ -37,7 +41,7 @@ const studentSchema = new mongoose.Schema({
     contact: { type: String },
     address: { type: String }         // optional if not in form
   },
-  // skills: { type: [String], default: [] },
+  skills: { type: [String], default: [] },
   cards: { type: cardsSchema, default: {} } // 👈 now active
 }, { timestamps: true });
 
