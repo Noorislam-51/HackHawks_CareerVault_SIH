@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const studentRouter = require('./routes/student');
 const pendingDocsRoutes = require("./routes/pendingDocs");
+const staffRouter = require('./routes/staff'); // adjust path
 
 // Import Student model
 const studentModel = require('./models/StudentDB'); 
@@ -80,7 +81,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', studentRouter);
-app.use("/", pendingDocsRoutes);
+app.use('/', pendingDocsRoutes);
+app.use('/', staffRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

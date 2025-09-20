@@ -4,17 +4,6 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 const studentModel = require('../models/StudentDB');
 const PendingDocument = require("../models/PendingDocumentDB");
 const axios = require("axios");
-// router.get('/student/edit', (req, res, next) => {
-//   if (!req.isAuthenticated()) {
-//     return res.redirect('/login/student'); // redirect if not logged in
-//   }
-//   // req.user comes from Passport (deserializeUser)
-//   res.render('./student/studentEdit', { 
-//     title: 'Student Dashboard',
-//     student: req.user   // pass user details to EJS
-//   });
-// });
-
 
 
 router.get('/student/edit', async (req, res, next) => {
