@@ -275,43 +275,59 @@
 
       </form>
 
+
+    </div>
+  </div>
+
+
+
+
+
+
   <!-- Document Management Section -->
-  <% - include("../partials/uploadDocument") %>
+  <%- include("../partials/uploadDocument") %>
+
+    <script>
+
+      // Modal functions
+      function openEditModal() {
+        document.getElementById('editModal').style.display = 'block';
+      }
+
+      function closeEditModal() {
+        document.getElementById('editModal').style.display = 'none';
+      }
+
+      // Close modal when clicking outside
+      document.getElementById('editModal').addEventListener('click', function (e) {
+        if (e.target === this) {
+          closeEditModal();
+        }
+      });
 
 
-     <script>
-  // Modal functions
-  function openEditModal() {
-    document.getElementById('editModal').style.display = 'block';
-  }
 
-  function closeEditModal() {
-    document.getElementById('editModal').style.display = 'none';
-  }
 
-  // Close modal when clicking outside
-  document.getElementById('editModal').addEventListener('click', function (e) {
-    if (e.target === this) {
-      closeEditModal();
-    }
-  });
 
-  // Tab switching
-  document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
 
-  // Button handlers
-  document.querySelectorAll('.add-doc-btn').forEach(btn => {
-    btn.addEventListener('click', () => alert('Add document clicked'));
-  });
 
-  document.querySelector('.btn-primary').addEventListener('click', () => alert('Resume builder clicked'));
-  document.querySelector('.btn-secondary').addEventListener('click', () => alert('Download resume clicked'));
-</script>
+      // Tab switching
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      // Button handlers
+      document.querySelectorAll('.add-doc-btn').forEach(btn => {
+        btn.addEventListener('click', () => alert('Add document clicked'));
+      });
+
+      document.querySelector('.btn-primary').addEventListener('click', () => alert('Resume builder clicked'));
+      document.querySelector('.btn-secondary').addEventListener('click', () => alert('Download resume clicked'));
+    </script>
 </body>
+
 </html>
