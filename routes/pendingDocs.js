@@ -2,6 +2,7 @@
 const multer = require("multer");
 const path = require("path");
 const PendingDocument = require("../models/PendingDocumentDB");
+const Student = require("../models/StudentDB");
 
 const router = express.Router();
 
