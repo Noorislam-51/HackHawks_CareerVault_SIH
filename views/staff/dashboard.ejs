@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .header {
+      background: white;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #e9ecef;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .header .icon {
+      color: #28a745;
+      font-size: 1.5rem;
+    }
+
+    .staff-portal-btn {
+      background: #28a745;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-info h3 {
+      color: #6c757d;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-info .number {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .pending .number {
+      color: #ffc107;
+    }
+
+    .verified .number {
+      color: #28a745;
+    }
+
+    .total .number {
+      color: #007bff;
+    }
+
+    .month .number {
+      color: #28a745;
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+    }
+
+    .pending .stat-icon {
+      color: #ffc107;
+    }
+
+    .verified .stat-icon {
+      color: #28a745;
+    }
+
+    .total .stat-icon {
+      color: #007bff;
+    }
+
+    .month .stat-icon {
+      color: #28a745;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .nav-tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      text-decoration: none;
+      color: #6c757d;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-tab.active {
+      background: #ffc107;
+      color: white;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e9ecef;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .search-filter {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-box {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      width: 250px;
+    }
+
+    .filter-select {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #6c757d;
+    }
+
+    .document-type {
+      background: #fff3cd;
+      color: #856404;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .btn-view {
+      background: #f8f9fa;
+      color: #6c757d;
+    }
+
+    .btn-approve {
+      background: #28a745;
+      color: white;
+    }
+
+    .btn-reject {
+      background: #dc3545;
+      color: white;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <h1>
+      <span class="icon">👥</span>
+      Staff Dashboard
+    </h1>
+    <a href="#" class="staff-portal-btn">Staff Portal</a>
+  </header>
+
+  <div class="container">
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card pending">
+        <div class="stat-info">
+          <h3>Pending Documents</h3>
+          <div class="number">3</div>
+        </div>
+        <div class="stat-icon">⏰</div>
+      </div>
+
+      <div class="stat-card verified">
+        <div class="stat-info">
+          <h3>Verified Documents</h3>
+          <div class="number">2</div>
+        </div>
+        <div class="stat-icon">✅</div>
+      </div>
+
+      <div class="stat-card total">
+        <div class="stat-info">
+          <h3>Total Students</h3>
+          <div class="number">156</div>
+        </div>
+        <div class="stat-icon">🎓</div>
+      </div>
+
+      <div class="stat-card month">
+        <div class="stat-info">
+          <h3>This Month</h3>
+          <div class="number">89</div>
+        </div>
+        <div class="stat-icon">📅</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <a href="#" class="nav-tab active" data-tab="pending-documents">
+        ⏰ Pending Documents
+      </a>
+      <a href="#" class="nav-tab" data-tab="verified-documents">
+        ✅ Verified Documents
+      </a>
+      <a href="#" class="nav-tab" data-tab="attendance">
+        📋 Attendance
+      </a>
+      <a href="#" class="nav-tab" data-tab="marksheets">
+        📊 Marksheets
+      </a>
+    </div>
+
+    <!-- Main Content Section -->
+    <!-- Pending Documents Tab -->
+    <div class="content-section tab-content active" id="pending-documents">
+      <div class="section-header">
+        <h2 class="section-title">
+          ⏰ Pending Documents Review
+        </h2>
+        <div class="search-filter">
+          <input type="text" placeholder="Search students..." class="search-box">
+          <select class="filter-select">
+            <option value="">Filter by type</option>
+            <option value="internship">Internship Certificate</option>
+            <option value="achievement">Achievement Certificate</option>
+            <option value="project">Project Report</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Document Type</th>
+              <th>Upload Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CS21B1001</td>
+              <td>Alex Johnson</td>
+              <td>
+                <span class="document-type">Internship Certificate</span>
+              </td>
+              <td>2024-01-20</td>
+              <td class="actions">
+                <button class="btn btn-view">👁️</button>
+                <button class="btn btn-approve">✅ Approve</button>
+                <button class="btn btn-reject">❌ Reject</button>
+              </td>
+            </tr>
+            <tr>
+              <td>CS21B1002</td>
+              <td>Sarah Wilson</td>
+              <td>
+                <span class="document-type">Achievement Certificate</span>
+              </td>
+              <td>2024-01-19</td>
+              <td class="actions">
+                <button class="btn btn-view">👁️</button>
+                <button class="btn btn-approve">✅ Approve</button>
+                <button class="btn btn-reject">❌ Reject</button>
+              </td>
+            </tr>
+            <tr>
+              <td>EC21B1001</td>
+              <td>Mike Chen</td>
+              <td>
+                <span class="document-type">Project Report</span>
+              </td>
+              <td>2024-01-18</td>
+              <td class="actions">
+                <button class="btn btn-view">👁️</button>
+                <button class="btn btn-approve">✅ Approve</button>
+                <button class="btn btn-reject">❌ Reject</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Verified Documents Tab -->
+    <div class="content-section tab-content" id="verified-documents">
+      <div class="section-header">
+        <h2 class="section-title">
+          ✅ Verified Documents
+        </h2>
+        <div class="search-filter">
+          <input type="text" placeholder="Search verified documents..." class="search-box">
+          <select class="filter-select">
+            <option value="">Filter by type</option>
+            <option value="internship">Internship Certificate</option>
+            <option value="achievement">Achievement Certificate</option>
+            <option value="project">Project Report</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Document Type</th>
+              <th>Verified Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CS21B1003</td>
+              <td>Emma Davis</td>
+              <td>
+                <span class="document-type" style="background: #d4edda; color: #155724;">Internship Certificate</span>
+              </td>
+              <td>2024-01-15</td>
+              <td>
+                <span
+                  style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">✅
+                  Verified</span>
+              </td>
+            </tr>
+            <tr>
+              <td>EC21B1002</td>
+              <td>James Wilson</td>
+              <td>
+                <span class="document-type" style="background: #d4edda; color: #155724;">Project Report</span>
+              </td>
+              <td>2024-01-14</td>
+              <td>
+                <span
+                  style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">✅
+                  Verified</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Attendance Tab -->
+    <div class="content-section tab-content" id="attendance">
+      <div class="section-header">
+        <h2 class="section-title">
+          📋 Student Attendance
+        </h2>
+        <div class="search-filter">
+          <input type="text" placeholder="Search students..." class="search-box">
+          <select class="filter-select">
+            <option value="">Filter by class</option>
+            <option value="cs">Computer Science</option>
+            <option value="ec">Electronics</option>
+            <option value="me">Mechanical</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Class</th>
+              <th>Present Days</th>
+              <th>Total Days</th>
+              <th>Attendance %</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CS21B1001</td>
+              <td>Alex Johnson</td>
+              <td>CS-A</td>
+              <td>45</td>
+              <td>50</td>
+              <td>90%</td>
+              <td>
+                <span
+                  style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Good</span>
+              </td>
+            </tr>
+            <tr>
+              <td>CS21B1002</td>
+              <td>Sarah Wilson</td>
+              <td>CS-A</td>
+              <td>48</td>
+              <td>50</td>
+              <td>96%</td>
+              <td>
+                <span
+                  style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Excellent</span>
+              </td>
+            </tr>
+            <tr>
+              <td>EC21B1001</td>
+              <td>Mike Chen</td>
+              <td>EC-B</td>
+              <td>35</td>
+              <td>50</td>
+              <td>70%</td>
+              <td>
+                <span
+                  style="background: #ffc107; color: #212529; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Warning</span>
+              </td>
+            </tr>
+            <tr>
+              <td>ME21B1001</td>
+              <td>Lisa Brown</td>
+              <td>ME-A</td>
+              <td>30</td>
+              <td>50</td>
+              <td>60%</td>
+              <td>
+                <span
+                  style="background: #dc3545; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Critical</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Marksheets Tab -->
+    <div class="content-section tab-content" id="marksheets">
+      <div class="section-header">
+        <h2 class="section-title">
+          📊 Student Marksheets
+        </h2>
+        <div class="search-filter">
+          <input type="text" placeholder="Search students..." class="search-box">
+          <select class="filter-select">
+            <option value="">Filter by semester</option>
+            <option value="sem1">Semester 1</option>
+            <option value="sem2">Semester 2</option>
+            <option value="sem3">Semester 3</option>
+            <option value="sem4">Semester 4</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Semester</th>
+              <th>Total Marks</th>
+              <th>Obtained Marks</th>
+              <th>Percentage</th>
+              <th>Grade</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CS21B1001</td>
+              <td>Alex Johnson</td>
+              <td>Semester 4</td>
+              <td>500</td>
+              <td>420</td>
+              <td>84%</td>
+              <td>
+                <span
+                  style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">A</span>
+              </td>
+              <td class="actions">
+                <button class="btn btn-view">👁️ View</button>
+                <button class="btn" style="background: #007bff; color: white;">📄 Generate</button>
+              </td>
+            </tr>
+            <tr>
+              <td>CS21B1002</td>
+              <td>Sarah Wilson</td>
+              <td>Semester 4</td>
+              <td>500</td>
+              <td>465</td>
+              <td>93%</td>
+              <td>
+                <span
+                  style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">A+</span>
+              </td>
+              <td class="actions">
+                <button class="btn btn-view">👁️ View</button>
+                <button class="btn" style="background: #007bff; color: white;">📄 Generate</button>
+              </td>
+            </tr>
+            <tr>
+              <td>EC21B1001</td>
+              <td>Mike Chen</td>
+              <td>Semester 4</td>
+              <td>500</td>
+              <td>375</td>
+              <td>75%</td>
+              <td>
+                <span
+                  style="background: #ffc107; color: #212529; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">B</span>
+              </td>
+              <td class="actions">
+                <button class="btn btn-view">👁️ View</button>
+                <button class="btn" style="background: #007bff; color: white;">📄 Generate</button>
+              </td>
+            </tr>
+            <tr>
+              <td>ME21B1001</td>
+              <td>Lisa Brown</td>
+              <td>Semester 4</td>
+              <td>500</td>
+              <td>320</td>
+              <td>64%</td>
+              <td>
+                <span
+                  style="background: #dc3545; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">C</span>
+              </td>
+              <td class="actions">
+                <button class="btn btn-view">👁️ View</button>
+                <button class="btn" style="background: #007bff; color: white;">📄 Generate</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabs = document.querySelectorAll('.nav-tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function (e) {
+          e.preventDefault();
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          const targetTab = this.getAttribute('data-tab');
+          document.getElementById(targetTab).classList.add('active');
+        });
+      });
+
+      document.querySelectorAll('.btn-approve').forEach(btn => {
+        btn.addEventListener('click', function () {
+          if (confirm('Are you sure you want to approve this document?')) {
+            alert('Document approved!');
+            this.closest('tr').style.opacity = '0.5';
+          }
+        });
+      });
+
+      document.querySelectorAll('.btn-reject').forEach(btn => {
+        btn.addEventListener('click', function () {
+          if (confirm('Are you sure you want to reject this document?')) {
+            alert('Document rejected!');
+            this.closest('tr').style.opacity = '0.5';
+          }
+        });
+      });
+
+      document.querySelectorAll('.search-box').forEach(searchBox => {
+        searchBox.addEventListener('input', function () {
+          const searchTerm = this.value.toLowerCase();
+          const currentTab = this.closest('.tab-content');
+          const rows = currentTab.querySelectorAll('tbody tr');
+          rows.forEach(row => {
+            const name = row.cells[1].textContent.toLowerCase();
+            const studentId = row.cells[0].textContent.toLowerCase();
+            row.style.display = (name.includes(searchTerm) || studentId.includes(searchTerm)) ? '' : 'none';
+          });
+        });
+      });
+
+      document.querySelectorAll('.btn-view').forEach(btn => {
+        btn.addEventListener('click', function () {
+          alert('View functionality would open document details here');
+        });
+      });
+
+      document.querySelectorAll('.btn').forEach(btn => {
+        if (btn.textContent.includes('Generate')) {
+          btn.addEventListener('click', function () {
+            alert('Marksheet generation would start here');
+          });
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

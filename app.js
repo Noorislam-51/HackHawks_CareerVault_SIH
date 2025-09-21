@@ -12,6 +12,8 @@ const expressSession = require("express-session");
 var indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const studentRouter = require('./routes/student');
+const pendingDocsRoutes = require("./routes/pendingDocs");
+const staffRouter = require('./routes/staff'); // adjust path
 
 // Import Student model
 const studentModel = require('./models/StudentDB'); 
@@ -21,7 +23,9 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');  
+// Serve uploaded files statically (important for viewing later)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Session + flash
 app.use(flash());
@@ -77,6 +81,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/', studentRouter);
+app.use('/', pendingDocsRoutes);
+app.use('/', staffRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

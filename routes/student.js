@@ -2,17 +2,67 @@ var express = require('express');
 var router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn')
 const studentModel = require('../models/StudentDB');
+const PendingDocument = require("../models/PendingDocumentDB");
+const axios = require("axios");
 
-router.get('/student/edit', (req, res, next) => {
+
+router.get('/student/edit', async (req, res, next) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/login/student'); // redirect if not logged in
   }
-  // req.user comes from Passport (deserializeUser)
-  res.render('./student/studentEdit', { 
-    title: 'Student Dashboard',
-    student: req.user   // pass user details to EJS
-  });
+
+  try {
+    const studentId = req.user.studentId; // assuming req.user has studentId
+
+    // Fetch all pending documents for this student
+    const pendingDocs = await PendingDocument.find({ studentId, status: "pending" }).lean();
+    // Count of pending documents
+    const pendingCount = pendingDocs.length;
+    
+
+    // Render EJS with student info and pending docs
+    res.render('./student/studentEdit', {
+      title: 'Student Dashboard',
+      student: req.user,
+      pendingDocs,
+      pendingCount    // <-- new
+    });
+
+  } catch (err) {
+    console.error("Error fetching pending docs:", err);
+    next(err);
+  }
 });
+
+
+router.get('/student/view', async (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/login/student'); // redirect if not logged in
+  }
+
+  try {
+    const studentId = req.user.studentId; // assuming req.user has studentId
+
+    // Fetch all pending documents for this student
+    const pendingDocs = await PendingDocument.find({ studentId, status: "pending" }).lean();
+    // Count of pending documents
+    const pendingCount = pendingDocs.length;
+    
+
+    // Render EJS with student info and pending docs
+    res.render('./student/studentView', {
+      title: 'Student Dashboard',
+      student: req.user,
+      pendingDocs,
+      pendingCount    // <-- new
+    });
+
+  } catch (err) {
+    console.error("Error fetching pending docs:", err);
+    next(err);
+  }
+});
+
 
 // POST edit data (overwrite existing fields)
 router.post('/student/edit-data', async (req, res) => {
@@ -48,5 +98,15 @@ router.post('/student/edit-data', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+
+
+async function fetchSkillsFromAPI() {
+  const { data } = await axios.get(
+    "https://raw.githubusercontent.com/adamlouis/skills/master/skills.json"
+  );
+  return data; // returns an array of skill names
+}
+
 
 module.exports = router;

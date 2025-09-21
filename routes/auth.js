@@ -63,7 +63,7 @@ router.post("/register/staff", async (req, res) => {
       }
 
       passport.authenticate("staff-local")(req, res, function () {
-        res.redirect("/student/edit");
+        res.redirect("/staff/dashboard");
       });
     });
   } catch (err) {
@@ -82,7 +82,7 @@ router.post("/login/student", passport.authenticate("local", {
 }), function (req, res) { });
 // Staff login----------------
 router.post("/login/staff", passport.authenticate("staff-local", {
-  successRedirect: "/student/edit",
+  successRedirect: "/staff/dashboard",
   failureRedirect: "/",
   failureFlash: true
 }), function (req, res) { });
