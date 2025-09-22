@@ -1,22 +1,17 @@
-// Client ID: 86fvbnkhlwjcr7
-
-
-
 const mongoose = require("mongoose");
 const plm = require("passport-local-mongoose");
 
 mongoose.connect("mongodb://127.0.0.1:27017/SIH_Project");
 
-// Document schema for different cards
 const documentSchema = new mongoose.Schema({
-  title: { type: String, required: true },
+  title: { type: String, required: true, set: v => v.trim().replace(/\s+/g, "_").toLowerCase() },
   type: { type: String, required: true },
   file_url: { type: String, required: true },
   verified: { type: Boolean, default: false },
   upload_date: { type: Date, required: true },
   staff_comments: { type: String, default: "" }
 });
-// Cards schema
+
 const cardsSchema = new mongoose.Schema({
   academic_achievements: [documentSchema],
   conferences_workshops: [documentSchema],
@@ -34,19 +29,20 @@ const studentSchema = new mongoose.Schema({
   collegeId: { type: String, required: true },
   email: { type: String, required: true, unique: true, lowercase: true },
   basicDetails: {
-    fullName: { type: String, required: true },
-    dob: { type: Date },             // optional if not in form
-    course: { type: String },        // optional if not in form
-    year: { type: Number },          // optional if not in form
+    fullName: { 
+      type: String, required: true, 
+      set: v => v.trim().split(/\s+/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
+    },
+    dob: { type: Date },
+    course: { type: String },
+    year: { type: Number },
     contact: { type: String },
-    address: { type: String }         // optional if not in form
+    address: { type: String }
   },
   skills: { type: [String], default: [] },
-  cards: { type: cardsSchema, default: {} } // 👈 now active
+  cards: { type: cardsSchema, default: {} }
 }, { timestamps: true });
-
 
 studentSchema.plugin(plm, { usernameField: 'studentId' });
 const Student = mongoose.model("Student", studentSchema);
-
 module.exports = Student;

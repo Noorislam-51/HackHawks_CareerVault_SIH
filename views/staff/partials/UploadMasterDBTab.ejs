@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+   <div class="content-section tab-content active" id="masterDB-documents">
+      <div class="section-header">
+        <h2 class="section-title">
+          📤 MasterDB Document Upload
+        </h2>
+      </div>
+
+      <div class="form-container">
+        <form action="/staff/upload-master-doc" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+          <!-- Student ID -->
+          <div class="mb-3">
+            <label for="studentId" class="form-label">Student ID</label>
+            <input type="text" id="studentId" name="studentId" class="form-control" placeholder="Enter Student ID" required>
+            <div class="invalid-feedback">
+              Please provide a valid student ID.
+            </div>
+          </div>
+
+          <!-- Student name -->
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullName" name="fullName" required placeholder="Enter Student Name">
+            <div class="invalid-feedback">
+              Please provide the student's full name.
+            </div>
+          </div>
+
+          <!-- Document Title -->
+          <div class="mb-3">
+            <label for="title" class="form-label">Document Title</label>
+            <input type="text" id="title" name="title" class="form-control" placeholder="Enter Document Title" required>
+            <div class="invalid-feedback">
+              Please provide a document title.
+            </div>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select" required>
+              <option value="">-- Select Category --</option>
+              <option value="academic_achievements">Academic Achievements</option>
+              <option value="conferences_workshops">Conferences & Workshops</option>
+              <option value="certifications_earned">Certifications Earned</option>
+              <option value="club_activities_volunteering">Club Activities & Volunteering</option>
+              <option value="competitions_contests">Competitions & Contests</option>
+              <option value="leadership_roles_internships">Leadership Roles & Internships</option>
+              <option value="community_services">Community Services</option>
+              <option value="general_supporting_documents">General Supporting Documents</option>
+              <option value="others_documents">Others</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a category.
+            </div>
+          </div>
+
+          <!-- File Upload -->
+          <div class="mb-3">
+            <label for="file" class="form-label">Upload File</label>
+            <input type="file" id="file" name="file" class="form-control" accept=".pdf" required>
+            <div class="invalid-feedback">
+              Please select a PDF file to upload.
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+              📤 Upload Document
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+</body>
+</html>

@@ -14,6 +14,7 @@ const authRouter = require('./routes/auth');
 const studentRouter = require('./routes/student');
 const pendingDocsRoutes = require("./routes/pendingDocs");
 const staffRouter = require('./routes/staff'); // adjust path
+const verificationRoutes = require("./routes/verification");
 
 // Import Student model
 const studentModel = require('./models/StudentDB'); 
@@ -83,6 +84,7 @@ app.use('/', authRouter);
 app.use('/', studentRouter);
 app.use('/', pendingDocsRoutes);
 app.use('/', staffRouter);
+app.use("/staff", verificationRoutes); // ✅ Mount the route
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
