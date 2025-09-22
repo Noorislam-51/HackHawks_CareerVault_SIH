@@ -84,7 +84,7 @@ app.use('/', authRouter);
 app.use('/', studentRouter);
 app.use('/', pendingDocsRoutes);
 app.use('/', staffRouter);
-app.use("/", verificationRoutes); // ✅ Mount the route
+app.use("/staff", verificationRoutes); // ✅ Mount the route
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -50,6 +50,51 @@ router.post("/upload-master-doc", upload.single("file"), async (req, res) => {
 
 // GET: /verification/pending
 // GET: /verification/pending
+// router.get('/verification/pending', async (req, res) => {
+//   try {
+//     const search = req.query.search || '';
+//     const filter = req.query.filter || '';
+
+//     let pendingDocs = await PendingDocument.find({ status: 'pending' });
+
+//     if (search) {
+//       pendingDocs = pendingDocs.filter(doc => 
+//         doc.studentId && doc.studentId.toLowerCase().includes(search.toLowerCase())
+//       );
+//     }
+
+//     if (filter) {
+//       pendingDocs = pendingDocs.filter(doc =>
+//         doc.type && doc.type.toLowerCase() === filter.toLowerCase()
+//       );
+//     }
+
+//     const documents = await Promise.all(
+//       pendingDocs.map(async doc => {
+//         const masterStudent = await MasterStudent.findOne({ studentId: doc.studentId });
+//         let existsInMaster = false;
+//         let studentName = '';
+//         if (masterStudent && Array.isArray(masterStudent.documents)) {
+//           existsInMaster = masterStudent.documents.some(
+//             mDoc => mDoc.title.toLowerCase() === doc.title.toLowerCase()
+//           );
+//           studentName = masterStudent.fullName || '';
+//         }
+//         return { ...doc.toObject(), existsInMaster, studentName };
+//       })
+//     );
+
+//     res.render('/staff/dashboard', {
+//       documents,
+//       search,
+//       filter
+//     });
+//   } catch (err) {
+//     console.error("Error fetching pending docs:", err);
+//     res.status(500).send('Server Error');
+//   }
+// });
+// ---------------- GET PENDING DOCUMENTS ----------------
 router.get('/verification/pending', async (req, res) => {
   try {
     const search = req.query.search || '';
@@ -57,18 +102,21 @@ router.get('/verification/pending', async (req, res) => {
 
     let pendingDocs = await PendingDocument.find({ status: 'pending' });
 
+    // Apply search filter
     if (search) {
-      pendingDocs = pendingDocs.filter(doc => 
+      pendingDocs = pendingDocs.filter(doc =>
         doc.studentId && doc.studentId.toLowerCase().includes(search.toLowerCase())
       );
     }
 
+    // Apply type filter
     if (filter) {
       pendingDocs = pendingDocs.filter(doc =>
         doc.type && doc.type.toLowerCase() === filter.toLowerCase()
       );
     }
 
+    // Cross-check with MasterStudent collection
     const documents = await Promise.all(
       pendingDocs.map(async doc => {
         const masterStudent = await MasterStudent.findOne({ studentId: doc.studentId });
@@ -84,19 +132,15 @@ router.get('/verification/pending', async (req, res) => {
       })
     );
 
-    res.render('/staff/dashboard', {
-      documents,
-      search,
-      filter
-    });
+    // Render staff dashboard
+    res.render('staff/dashboard', { documents, search, filter });
   } catch (err) {
-    console.error("Error fetching pending docs:", err);
+    console.error("Error fetching pending documents:", err);
     res.status(500).send('Server Error');
   }
 });
 
 
-// POST: /verification/approve/:id
 // router.post('/verification/approve/:id', async (req, res) => {
 //   try {
 //     const docId = req.params.id;
@@ -132,19 +176,83 @@ router.get('/verification/pending', async (req, res) => {
 //   }
 // });
 // ---------------- APPROVE DOCUMENT ----------------
+// router.post('/verification/approve/:id', async (req, res) => {
+//   try {
+//     const docId = req.params.id;
+//     const pendingDoc = await PendingDocument.findById(docId);
+//     if (!pendingDoc) {
+//       req.flash('error', 'Document not found');
+//       return res.redirect('/verification/pending');
+//     }
+
+//     pendingDoc.status = 'approved';
+//     await pendingDoc.save();
+
+//     const student = await Student.findOne({ studentId: pendingDoc.studentId });
+//     if (student) {
+//       student.cards = student.cards || {};
+//       student.cards[pendingDoc.type] = student.cards[pendingDoc.type] || [];
+//       student.cards[pendingDoc.type].push({
+//         title: pendingDoc.title,
+//         type: pendingDoc.type,
+//         file_url: pendingDoc.file_url,
+//         verified: true,
+//         upload_date: pendingDoc.upload_date
+//       });
+//       await student.save();
+//     }
+
+//     req.flash('success', 'Document approved successfully!');
+//     res.redirect('/verification/pending');
+//   } catch (err) {
+//     console.error("Error approving document:", err);
+//     req.flash('error', 'Error approving document');
+//     res.redirect('/verification/pending');
+//   }
+// });
+
+
+
+
+// router.post('/verification/reject/:id', async (req, res) => {
+//   try {
+//     const docId = req.params.id;
+//     const pendingDoc = await PendingDocument.findById(docId);
+//     if (!pendingDoc) {
+//       req.flash('error', 'Document not found');
+//       return res.redirect('/verification/pending');
+//     }
+
+//     pendingDoc.status = 'rejected';
+//     pendingDoc.staff_comments = 'Rejected by staff';
+//     await pendingDoc.save();
+
+//     req.flash('success', 'Document rejected successfully!');
+//     res.redirect('/verification/pending');
+//   } catch (err) {
+//     console.error("Error rejecting document:", err);
+//     req.flash('error', 'Error rejecting document');
+//     res.redirect('/verification/pending');
+//   }
+// });
+
+// ---------------- APPROVE DOCUMENT ----------------
 router.post('/verification/approve/:id', async (req, res) => {
   try {
     const docId = req.params.id;
     const pendingDoc = await PendingDocument.findById(docId);
+
     if (!pendingDoc) {
       req.flash('error', 'Document not found');
-      return res.redirect('/verification/pending');
+      return res.redirect('/staff/verification/pending');
     }
 
+    // Update pending document status
     pendingDoc.status = 'approved';
     await pendingDoc.save();
 
-    const student = await Student.findOne({ studentId: pendingDoc.studentId });
+    // Add document to Student DB under proper card type
+    let student = await Student.findOne({ studentId: pendingDoc.studentId });
     if (student) {
       student.cards = student.cards || {};
       student.cards[pendingDoc.type] = student.cards[pendingDoc.type] || [];
@@ -159,57 +267,38 @@ router.post('/verification/approve/:id', async (req, res) => {
     }
 
     req.flash('success', 'Document approved successfully!');
-    res.redirect('/verification/pending');
+    res.redirect('/staff/verification/pending');
   } catch (err) {
     console.error("Error approving document:", err);
     req.flash('error', 'Error approving document');
-    res.redirect('/verification/pending');
+    res.redirect('/staff/verification/pending');
   }
 });
 
-
-
-// POST: /verification/reject/:id
-// router.post('/verification/reject/:id', async (req, res) => {
-//   try {
-//     const docId = req.params.id;
-
-//     const pendingDoc = await PendingDocument.findById(docId);
-//     if (!pendingDoc) return res.status(404).send('Document not found');
-
-//     pendingDoc.status = 'rejected';
-//     pendingDoc.staff_comments = 'Rejected by staff';
-//     await pendingDoc.save();
-
-//     res.redirect('/verification/pending');
-//   } catch (err) {
-//     console.error("Error rejecting document:", err);
-//     res.status(500).send('Error rejecting document');
-//   }
-// });
+// ---------------- REJECT DOCUMENT ----------------
 router.post('/verification/reject/:id', async (req, res) => {
   try {
     const docId = req.params.id;
     const pendingDoc = await PendingDocument.findById(docId);
+
     if (!pendingDoc) {
       req.flash('error', 'Document not found');
-      return res.redirect('/verification/pending');
+      return res.redirect('/staff/verification/pending');
     }
 
+    // Update pending document status and staff comments
     pendingDoc.status = 'rejected';
     pendingDoc.staff_comments = 'Rejected by staff';
     await pendingDoc.save();
 
     req.flash('success', 'Document rejected successfully!');
-    res.redirect('/verification/pending');
+    res.redirect('/staff/verification/pending');
   } catch (err) {
     console.error("Error rejecting document:", err);
     req.flash('error', 'Error rejecting document');
-    res.redirect('/verification/pending');
+    res.redirect('/staff/verification/pending');
   }
 });
-
-
 
 
 module.exports = router;
