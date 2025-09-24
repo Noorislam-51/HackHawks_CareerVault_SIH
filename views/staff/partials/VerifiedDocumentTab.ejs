@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="content-section tab-content" id="verified-documents">
+    <div class="section-header">
+      <h2 class="section-title">
+        ✅ Verified Documents
+      </h2>
+      <div class="search-filter">
+        <input type="text" placeholder="Search verified documents..." class="search-box" id="verified-search">
+        <select class="filter-select" id="verified-filter">
+          <option value="">Filter by type</option>
+          <option value="internship">Internship Certificate</option>
+          <option value="achievement">Achievement Certificate</option>
+          <option value="project">Project Report</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Document Type</th>
+            <th>Verified Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="verified-tbody">
+          <tr>
+            <td>CS21B1003</td>
+            <td>Emma Davis</td>
+            <td>
+              <span class="document-type" style="background: #d4edda; color: #155724;">Internship
+                Certificate</span>
+            </td>
+            <td>2024-01-15</td>
+            <td>
+              <span
+                style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">✅
+                Verified</span>
+            </td>
+          </tr>
+          <tr>
+            <td>EC21B1002</td>
+            <td>James Wilson</td>
+            <td>
+              <span class="document-type" style="background: #d4edda; color: #155724;">Project Report</span>
+            </td>
+            <td>2024-01-14</td>
+            <td>
+              <span
+                style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">✅
+                Verified</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

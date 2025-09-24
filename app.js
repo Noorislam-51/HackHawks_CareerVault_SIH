@@ -15,6 +15,7 @@ const studentRouter = require('./routes/student');
 const pendingDocsRoutes = require("./routes/pendingDocs");
 const staffRouter = require('./routes/staff'); // adjust path
 const verificationRoutes = require("./routes/verification");
+const uploadMarkAttendanceRoutes = require("./routes/uploadMarksheetAttendance");
 
 // Import Student model
 const studentModel = require('./models/StudentDB'); 
@@ -25,7 +26,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');  
-// Serve uploaded files statically (important for viewing later)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Session + flash
@@ -84,6 +84,7 @@ app.use('/', authRouter);
 app.use('/', studentRouter);
 app.use('/', pendingDocsRoutes);
 app.use('/', staffRouter);
+app.use('/', uploadMarkAttendanceRoutes);
 app.use("/staff", verificationRoutes); // ✅ Mount the route
 
 // catch 404 and forward to error handler
