@@ -10,349 +10,356 @@
 </head>
 
 <body>
-  <div class="container">
+  <%- include("../MainPartials/NavBar") %>
+
+    <div class="container">
 
 
-    <div class="profile-container">
-      <!-- Header with gradient background -->
-      <div class="profile-header">
-        <button class="edit-details-btn" onclick="openEditModal()">
-          📝 Edit Details
-        </button>
-        <a href="/student/view">
-          <button class="view-details-btn">
-            📝 View Details
+      <div class="profile-container">
+        <!-- Header with gradient background -->
+        <div class="profile-header">
+          <button class="edit-details-btn" onclick="openEditModal()">
+            📝 Edit Details
           </button>
-        </a>
+          <a href="/student/view">
+            <button class="view-details-btn">
+              📝 View Details
+            </button>
+          </a>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+          <!-- Profile Top Section -->
+          <div class="profile-top">
+            <div class="avatar" id="avatar">JD</div>
+            <div class="profile-info">
+              <h1 class="profile-name" id="profile-name">
+                <%= student.basicDetails.fullName %>
+              </h1>
+              <div class="profile-meta">
+                <span># Roll No: <span id="profile-roll">
+                    <%= student.studentId %>
+                  </span></span>
+                <span>👁️ <span id="profile-college">
+                    <%= student.collegeId%>
+                  </span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Details Grid -->
+          <div class="profile-details">
+            <!-- Left Column -->
+            <div class="details-left">
+              <div class="detail-item">
+                <div class="detail-icon">🎓</div>
+                <div class="detail-content">
+                  <div class="detail-label">Course</div>
+                  <div class="detail-value" id="profile-course">
+                    <%= student.basicDetails.course %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">📅</div>
+                <div class="detail-content">
+                  <div class="detail-label">Year</div>
+                  <div class="detail-value" id="profile-year">
+                    <%= student.basicDetails.year %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">📅</div>
+                <div class="detail-content">
+                  <div class="detail-label">Date of Birth</div>
+                  <div class="detail-value" id="profile-dob">
+                    <%= student.basicDetails.dob %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="details-right">
+              <div class="detail-item">
+                <div class="detail-icon">✉️</div>
+                <div class="detail-content">
+                  <div class="detail-label">Email</div>
+                  <div class="detail-value" id="profile-email">
+                    <%= student.email %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">📞</div>
+                <div class="detail-content">
+                  <div class="detail-label">Contact</div>
+                  <div class="detail-value" id="profile-contact">
+                    <%= student.contactNumber%>
+                  </div>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">📍</div>
+                <div class="detail-content">
+                  <div class="detail-label">Address</div>
+                  <div class="detail-value" id="profile-address">
+                    <%= student.basicDetails.address %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="skills-section">
+            <h3 class="skills-title">Skills</h3>
+            <div class="skills-container" id="profile-skills">
+              <span class="skill-tag skill-javascript">JavaScript</span>
+              <span class="skill-tag skill-react">React</span>
+              <span class="skill-tag skill-python">Python</span>
+              <span class="skill-tag skill-ml">Machine Learning</span>
+              <span class="skill-tag skill-nodejs">Node.js</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button class="btn btn-primary">
+              📄 Resume Builder
+            </button>
+            <button class="btn btn-secondary">
+              ⬇️ Download Resume
+            </button>
+          </div>
+        </div>
       </div>
 
-      <!-- Profile Content -->
-      <div class="profile-content">
-        <!-- Profile Top Section -->
-        <div class="profile-top">
-          <div class="avatar" id="avatar">JD</div>
-          <div class="profile-info">
-            <h1 class="profile-name" id="profile-name">
-              <%= student.basicDetails.fullName %>
-            </h1>
-            <div class="profile-meta">
-              <span># Roll No: <span id="profile-roll">
-                  <%= student.studentId %>
-                </span></span>
-              <span>👁️ <span id="profile-college">
-                  <%= student.collegeId%>
-                </span></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Profile Details Grid -->
-        <div class="profile-details">
-          <!-- Left Column -->
-          <div class="details-left">
-            <div class="detail-item">
-              <div class="detail-icon">🎓</div>
-              <div class="detail-content">
-                <div class="detail-label">Course</div>
-                <div class="detail-value" id="profile-course">
-                  <%= student.basicDetails.course %>
-                </div>
-              </div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-icon">📅</div>
-              <div class="detail-content">
-                <div class="detail-label">Year</div>
-                <div class="detail-value" id="profile-year">
-                  <%= student.basicDetails.year %>
-                </div>
-              </div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-icon">📅</div>
-              <div class="detail-content">
-                <div class="detail-label">Date of Birth</div>
-                <div class="detail-value" id="profile-dob">
-                  <%= student.basicDetails.dob %>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right Column -->
-          <div class="details-right">
-            <div class="detail-item">
-              <div class="detail-icon">✉️</div>
-              <div class="detail-content">
-                <div class="detail-label">Email</div>
-                <div class="detail-value" id="profile-email">
-                  <%= student.email %>
-                </div>
-              </div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-icon">📞</div>
-              <div class="detail-content">
-                <div class="detail-label">Contact</div>
-                <div class="detail-value" id="profile-contact">
-                  <%= student.contactNumber%>
-                </div>
-              </div>
-            </div>
-
-            <div class="detail-item">
-              <div class="detail-icon">📍</div>
-              <div class="detail-content">
-                <div class="detail-label">Address</div>
-                <div class="detail-value" id="profile-address">
-                  <%= student.basicDetails.address %>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Skills Section -->
-        <div class="skills-section">
-          <h3 class="skills-title">Skills</h3>
-          <div class="skills-container" id="profile-skills">
-            <span class="skill-tag skill-javascript">JavaScript</span>
-            <span class="skill-tag skill-react">React</span>
-            <span class="skill-tag skill-python">Python</span>
-            <span class="skill-tag skill-ml">Machine Learning</span>
-            <span class="skill-tag skill-nodejs">Node.js</span>
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-          <button class="btn btn-primary">
-            📄 Resume Builder
-          </button>
-          <button class="btn btn-secondary">
-            ⬇️ Download Resume
-          </button>
-        </div>
-      </div>
+    </div>
     </div>
 
-  </div>
-  </div>
 
+    <div class="nav-tabs">
+      <a href="#" class="nav-tab active" data-tab="upload-documents">
+        📤 Upload Document
+      </a>
+      <a href="#" class="nav-tab" data-tab="view-attendance">
+        ⏰ Attendance
+      </a>
+      <a href="#" class="nav-tab" data-tab="all-documents">
+        ✅ All Documents
+      </a>
+      <a href="#" class="nav-tab" data-tab="view-Spi">
+        📊 SPI
+      </a>
+    </div>
 
-  <div class="nav-tabs">
-    <a href="#" class="nav-tab active" data-tab="upload-documents">
-      📤 Upload Document
-    </a>
-    <a href="#" class="nav-tab" data-tab="view-attendance">
-      ⏰ Attendance
-    </a>
-    <a href="#" class="nav-tab" data-tab="all-documents">
-      ✅ All Documents
-    </a>
-    <a href="#" class="nav-tab" data-tab="view-Spi">
-      📊 SPI
-    </a>
-  </div>
-
-  <%- include("./partials/uploadDocument") %>
-    <%- include("./partials/ViewAttendance", { student: student, attendance: student.attendance }) %>
-      <%- include("./partials/ViewSpi", { student: student, spi: student.spi }) %>
-        <%- include("./partials/AllDocumentTab", { allDocs: allDocs, student: student }) %>
+    <%- include("./partials/uploadDocument") %>
+      <%- include("./partials/ViewAttendance", { student: student, attendance: student.attendance }) %>
+        <%- include("./partials/ViewSpi", { student: student, spi: student.spi }) %>
+          <%- include("./partials/AllDocumentTab", { allDocs: allDocs, student: student }) %>
 
 
 
 
-          <!-- Edit Modal -->
-          <div class="modal-overlay" id="editModal">
-            <div class="modal">
-              <div class="modal-header">
-                <h2 class="modal-title">Edit Student Details</h2>
-                <button class="close-btn" onclick="closeEditModal()">×</button>
+            <!-- Edit Modal -->
+            <div class="modal-overlay" id="editModal">
+              <div class="modal">
+                <div class="modal-header">
+                  <h2 class="modal-title">Edit Student Details</h2>
+                  <button class="close-btn" onclick="closeEditModal()">×</button>
+                </div>
+
+                <p class="modal-subtitle">Make changes to your profile information here. Click save when you're done.
+                </p>
+
+                <form action="/student/edit-data" method="POST" id="editForm">
+
+                  <!-- Row 1: Name + Student ID -->
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Name</label>
+                      <input type="text" class="form-input" id="edit-name" name="fullName"
+                        value="<%= student.basicDetails?.fullName || '' %>" placeholder="Enter full name">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Roll No (Student ID)</label>
+                      <input type="text" class="form-input" id="edit-roll" name="studentId"
+                        value="<%= student.studentId || '' %>" placeholder="Enter roll no" required>
+                    </div>
+                  </div>
+
+                  <!-- Row 2: College ID + DOB -->
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">College ID</label>
+                      <select class="form-select" id="collegeId" name="collegeId">
+                        <option value="">Select your college</option>
+                        <option value="JMI" <%=student.collegeId==='JMI' ? 'selected' : '' %>>Jamia Millia Islamia (JMI)
+                        </option>
+                        <option value="AMU" <%=student.collegeId==='AMU' ? 'selected' : '' %>>Aligarh Muslim University
+                          (AMU)
+                        </option>
+                        <option value="DU" <%=student.collegeId==='DU' ? 'selected' : '' %>>Delhi University (DU)
+                        </option>
+                        <option value="JNU" <%=student.collegeId==='JNU' ? 'selected' : '' %>>Jawaharlal Nehru
+                          University
+                          (JNU)
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Date of Birth</label>
+                      <input type="date" class="form-input" id="edit-dob" name="dob"
+                        value="<%= student.basicDetails?.dob ? student.basicDetails.dob.toISOString().split('T')[0] : '' %>">
+                    </div>
+                  </div>
+
+                  <!-- Row 3: Course + Year -->
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="edit-course">Course</label>
+                      <select class="form-select" id="edit-course" name="course">
+                        <option value="">Select your course</option>
+                        <option value="BTECH_CSE" <%=student.basicDetails?.course==='BTECH_CSE' ? 'selected' : '' %>
+                          >B.Tech
+                          Computer Science Engineering</option>
+                        <option value="BTECH_ECE" <%=student.basicDetails?.course==='BTECH_ECE' ? 'selected' : '' %>
+                          >B.Tech
+                          Electronics and Communication Engineering</option>
+                        <option value="BTECH_ME" <%=student.basicDetails?.course==='BTECH_ME' ? 'selected' : '' %>
+                          >B.Tech
+                          Mechanical Engineering</option>
+                        <option value="BSC_CS" <%=student.basicDetails?.course==='BSC_CS' ? 'selected' : '' %>>B.Sc
+                          Computer
+                          Science</option>
+                        <option value="MBA" <%=student.basicDetails?.course==='MBA' ? 'selected' : '' %>>Master of
+                          Business
+                          Administration</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Year</label>
+                      <input type="number" class="form-input" id="edit-year" name="year"
+                        value="<%= student.basicDetails?.year || '' %>" placeholder="e.g. 3">
+                    </div>
+                  </div>
+
+                  <!-- Row 4: Contact + Email -->
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Contact Number</label>
+                      <input type="text" class="form-input" id="edit-contact" name="contact"
+                        value="<%= student.basicDetails?.contact || '' %>" placeholder="Enter contact number">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-input" id="edit-email" name="email"
+                        value="<%= student.email || '' %>" placeholder="Enter email">
+                    </div>
+                  </div>
+
+                  <!-- Full-width Address -->
+                  <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <textarea class="form-input" id="edit-address" name="address"
+                      placeholder="Enter address"><%= student.basicDetails?.address || '' %></textarea>
+                  </div>
+
+                  <!-- Skills Section -->
+                  <div class="skills-section">
+                    <label class="form-label">Skills</label>
+                    <div class="skills-input-container">
+                      <input type="text" class="form-input" id="skill-input" name="skills" placeholder="Add a skill">
+                      <button type="button" class="add-skill-btn" onclick="addSkill()">+</button>
+                    </div>
+                    <div class="modal-skills-tags" id="modal-skills">
+                      <% if(student.skills && student.skills.length> 0) { %>
+                        <% student.skills.forEach(skill=> { %>
+                          <div class="modal-skill-tag">
+                            <%= skill %> <button type="button" class="remove-skill"
+                                onclick="removeSkill(this)">×</button>
+                          </div>
+                          <% }) %>
+                            <% } %>
+                    </div>
+                  </div>
+
+                  <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                  </div>
+
+                </form>
+
+
               </div>
-
-              <p class="modal-subtitle">Make changes to your profile information here. Click save when you're done.</p>
-
-              <form action="/student/edit-data" method="POST" id="editForm">
-
-                <!-- Row 1: Name + Student ID -->
-                <div class="form-row">
-                  <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-input" id="edit-name" name="fullName"
-                      value="<%= student.basicDetails?.fullName || '' %>" placeholder="Enter full name">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Roll No (Student ID)</label>
-                    <input type="text" class="form-input" id="edit-roll" name="studentId"
-                      value="<%= student.studentId || '' %>" placeholder="Enter roll no" required>
-                  </div>
-                </div>
-
-                <!-- Row 2: College ID + DOB -->
-                <div class="form-row">
-                  <div class="form-group">
-                    <label class="form-label">College ID</label>
-                    <select class="form-select" id="collegeId" name="collegeId">
-                      <option value="">Select your college</option>
-                      <option value="JMI" <%=student.collegeId==='JMI' ? 'selected' : '' %>>Jamia Millia Islamia (JMI)
-                      </option>
-                      <option value="AMU" <%=student.collegeId==='AMU' ? 'selected' : '' %>>Aligarh Muslim University
-                        (AMU)
-                      </option>
-                      <option value="DU" <%=student.collegeId==='DU' ? 'selected' : '' %>>Delhi University (DU)</option>
-                      <option value="JNU" <%=student.collegeId==='JNU' ? 'selected' : '' %>>Jawaharlal Nehru University
-                        (JNU)
-                      </option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Date of Birth</label>
-                    <input type="date" class="form-input" id="edit-dob" name="dob"
-                      value="<%= student.basicDetails?.dob ? student.basicDetails.dob.toISOString().split('T')[0] : '' %>">
-                  </div>
-                </div>
-
-                <!-- Row 3: Course + Year -->
-                <div class="form-row">
-                  <div class="form-group">
-                    <label class="form-label" for="edit-course">Course</label>
-                    <select class="form-select" id="edit-course" name="course">
-                      <option value="">Select your course</option>
-                      <option value="BTECH_CSE" <%=student.basicDetails?.course==='BTECH_CSE' ? 'selected' : '' %>
-                        >B.Tech
-                        Computer Science Engineering</option>
-                      <option value="BTECH_ECE" <%=student.basicDetails?.course==='BTECH_ECE' ? 'selected' : '' %>
-                        >B.Tech
-                        Electronics and Communication Engineering</option>
-                      <option value="BTECH_ME" <%=student.basicDetails?.course==='BTECH_ME' ? 'selected' : '' %>>B.Tech
-                        Mechanical Engineering</option>
-                      <option value="BSC_CS" <%=student.basicDetails?.course==='BSC_CS' ? 'selected' : '' %>>B.Sc
-                        Computer
-                        Science</option>
-                      <option value="MBA" <%=student.basicDetails?.course==='MBA' ? 'selected' : '' %>>Master of
-                        Business
-                        Administration</option>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="form-label">Year</label>
-                    <input type="number" class="form-input" id="edit-year" name="year"
-                      value="<%= student.basicDetails?.year || '' %>" placeholder="e.g. 3">
-                  </div>
-                </div>
-
-                <!-- Row 4: Contact + Email -->
-                <div class="form-row">
-                  <div class="form-group">
-                    <label class="form-label">Contact Number</label>
-                    <input type="text" class="form-input" id="edit-contact" name="contact"
-                      value="<%= student.basicDetails?.contact || '' %>" placeholder="Enter contact number">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-input" id="edit-email" name="email"
-                      value="<%= student.email || '' %>" placeholder="Enter email">
-                  </div>
-                </div>
-
-                <!-- Full-width Address -->
-                <div class="form-group">
-                  <label class="form-label">Address</label>
-                  <textarea class="form-input" id="edit-address" name="address"
-                    placeholder="Enter address"><%= student.basicDetails?.address || '' %></textarea>
-                </div>
-
-                <!-- Skills Section -->
-                <div class="skills-section">
-                  <label class="form-label">Skills</label>
-                  <div class="skills-input-container">
-                    <input type="text" class="form-input" id="skill-input" name="skills" placeholder="Add a skill">
-                    <button type="button" class="add-skill-btn" onclick="addSkill()">+</button>
-                  </div>
-                  <div class="modal-skills-tags" id="modal-skills">
-                    <% if(student.skills && student.skills.length> 0) { %>
-                      <% student.skills.forEach(skill=> { %>
-                        <div class="modal-skill-tag">
-                          <%= skill %> <button type="button" class="remove-skill" onclick="removeSkill(this)">×</button>
-                        </div>
-                        <% }) %>
-                          <% } %>
-                  </div>
-                </div>
-
-                <div class="modal-actions">
-                  <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
-                  <button type="submit" class="btn-save">Save Changes</button>
-                </div>
-
-              </form>
-
-
             </div>
-          </div>
 
 
 
 
-          <!-- Document Management Section -->
+            <!-- Document Management Section -->
 
 
-          <script>
+            <script>
 
-            // Modal functions
-            function openEditModal() {
-              document.getElementById('editModal').style.display = 'block';
-            }
-
-            function closeEditModal() {
-              document.getElementById('editModal').style.display = 'none';
-            }
-
-            // Close modal when clicking outside
-            document.getElementById('editModal').addEventListener('click', function (e) {
-              if (e.target === this) {
-                closeEditModal();
+              // Modal functions
+              function openEditModal() {
+                document.getElementById('editModal').style.display = 'block';
               }
-            });
 
-            // Tab functionality
-            const tabs = document.querySelectorAll('.nav-tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            function switchTab(targetTab) {
-              tabs.forEach(t => t.classList.remove('active'));
-              tabContents.forEach(c => c.classList.remove('active'));
-
-              const activeTab = document.querySelector(`[data-tab="${targetTab}"]`);
-              const activeContent = document.getElementById(targetTab);
-
-              if (activeTab && activeContent) {
-                activeTab.classList.add('active');
-                activeContent.classList.add('active');
+              function closeEditModal() {
+                document.getElementById('editModal').style.display = 'none';
               }
-            }
 
-            tabs.forEach(tab => {
-              tab.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetTab = this.getAttribute('data-tab');
-                switchTab(targetTab);
+              // Close modal when clicking outside
+              document.getElementById('editModal').addEventListener('click', function (e) {
+                if (e.target === this) {
+                  closeEditModal();
+                }
               });
-            });
 
-            // Button handlers
-            document.querySelectorAll('.add-doc-btn').forEach(btn => {
-              btn.addEventListener('click', () => alert('Add document clicked'));
-            });
+              // Tab functionality
+              const tabs = document.querySelectorAll('.nav-tab');
+              const tabContents = document.querySelectorAll('.tab-content');
 
-            document.querySelector('.btn-primary').addEventListener('click', () => alert('Resume builder clicked'));
-            document.querySelector('.btn-secondary').addEventListener('click', () => alert('Download resume clicked'));
-          </script>
+              function switchTab(targetTab) {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+
+                const activeTab = document.querySelector(`[data-tab="${targetTab}"]`);
+                const activeContent = document.getElementById(targetTab);
+
+                if (activeTab && activeContent) {
+                  activeTab.classList.add('active');
+                  activeContent.classList.add('active');
+                }
+              }
+
+              tabs.forEach(tab => {
+                tab.addEventListener('click', function (e) {
+                  e.preventDefault();
+                  const targetTab = this.getAttribute('data-tab');
+                  switchTab(targetTab);
+                });
+              });
+
+              // Button handlers
+              document.querySelectorAll('.add-doc-btn').forEach(btn => {
+                btn.addEventListener('click', () => alert('Add document clicked'));
+              });
+
+              document.querySelector('.btn-primary').addEventListener('click', () => alert('Resume builder clicked'));
+              document.querySelector('.btn-secondary').addEventListener('click', () => alert('Download resume clicked'));
+            </script>
 </body>
 
 </html>

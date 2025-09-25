@@ -34,7 +34,8 @@ router.get('/staff/dashboard', async (req, res) => {
     res.render("staff/dashboard", {
       documents: docsWithMasterCheck,
       search,   // ✅ pass search
-      filter    // ✅ pass filter
+      filter ,
+      userType: 'staff'   // ✅ pass filter
     });
   } catch (err) {
     console.error(err);

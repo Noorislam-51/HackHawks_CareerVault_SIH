@@ -10,14 +10,10 @@
 </head>
 
 <body>
-  <header class="header">
-    <h1>
-      <span class="icon">👥</span>
-      Staff Dashboard
-    </h1>
-    <a href="#" class="staff-portal-btn">Staff Portal</a>
-  </header>
+  <div>
+    <%- include("../MainPartials/NavBar") %>
 
+  </div>
   <div class="container">
     <!-- Statistics Cards -->
     <div class="stats-grid">
@@ -86,17 +82,17 @@
         <!-- Verified Documents Tab -->
         <!-- <div class="content-section tab-content" id="verified-documents"> -->
         <!-- <%- include("./partials/VerifiedDocumentTab") %> -->
+        <!-- </div> -->
+
+        <!-- Attendance Upload Tab -->
+        <!-- <div class="content-section tab-content" id="upload-attendance"> -->
+        <%- include("./partials/UploadAttendanceTab") %>
           <!-- </div> -->
 
-          <!-- Attendance Upload Tab -->
-          <!-- <div class="content-section tab-content" id="upload-attendance"> -->
-          <%- include("./partials/UploadAttendanceTab") %>
+          <!-- Upload SPI / Marksheets Tab -->
+          <!-- <div class="content-section tab-content" id="spi-upload"> -->
+          <%- include("./partials/UploadSpiTab") %>
             <!-- </div> -->
-
-            <!-- Upload SPI / Marksheets Tab -->
-            <!-- <div class="content-section tab-content" id="spi-upload"> -->
-            <%- include("./partials/UploadSpiTab") %>
-              <!-- </div> -->
 
 
   </div>

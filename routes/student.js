@@ -29,7 +29,8 @@ router.get('/student/edit', async (req, res, next) => {
       pendingDocs,
       pendingCount,
       results: {},
-      allDocs     // <-- new
+      allDocs  ,
+      userType: 'student'   // <-- new
     });
 
   } catch (err) {

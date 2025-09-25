@@ -955,28 +955,7 @@ textarea.form-input {
       color: #333;
     }
 
-    .header {
-      background: white;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #e9ecef;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header h1 {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .header .icon {
-      color: #28a745;
-      font-size: 1.5rem;
-    }
+   
 
     .staff-portal-btn {
       background: #28a745;
