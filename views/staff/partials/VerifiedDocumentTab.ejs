@@ -8,63 +8,76 @@
 </head>
 
 <body>
-  <div class="content-section tab-content" id="verified-documents">
-    <div class="section-header">
-      <h2 class="section-title">
-        ✅ Verified Documents
-      </h2>
-      <div class="search-filter">
-        <input type="text" placeholder="Search verified documents..." class="search-box" id="verified-search">
-        <select class="filter-select" id="verified-filter">
-          <option value="">Filter by type</option>
-          <option value="internship">Internship Certificate</option>
-          <option value="achievement">Achievement Certificate</option>
-          <option value="project">Project Report</option>
-        </select>
-      </div>
-    </div>
+  <div class="content-section tab-content active" id="verified-documents">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">✅ Verified Documents</h2>
 
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Student ID</th>
-            <th>Name</th>
-            <th>Document Type</th>
-            <th>Verified Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="verified-tbody">
-          <tr>
-            <td>CS21B1003</td>
-            <td>Emma Davis</td>
-            <td>
-              <span class="document-type" style="background: #d4edda; color: #155724;">Internship
-                Certificate</span>
-            </td>
-            <td>2024-01-15</td>
-            <td>
-              <span
-                style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">✅
-                Verified</span>
-            </td>
-          </tr>
-          <tr>
-            <td>EC21B1002</td>
-            <td>James Wilson</td>
-            <td>
-              <span class="document-type" style="background: #d4edda; color: #155724;">Project Report</span>
-            </td>
-            <td>2024-01-14</td>
-            <td>
-              <span
-                style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">✅
-                Verified</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <form method="GET" action="/verification/verified" class="search-filter">
+          <input type="text" name="search" placeholder="Search verified documents..." class="search-box"
+            value="<%= search %>">
+
+          <select name="filter" class="filter-select">
+            <option value="">Filter by type</option>
+            <option value="internship" <%=filter==='internship' ? 'selected' : '' %>>Internship Certificate</option>
+            <option value="achievement" <%=filter==='achievement' ? 'selected' : '' %>>Achievement Certificate</option>
+            <option value="project" <%=filter==='project' ? 'selected' : '' %>>Project Report</option>
+          </select>
+
+          <button type="submit">🔍</button>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Document Type</th>
+              <th>Title</th>
+              <th>Upload Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="verified-tbody">
+            <% if (documents.length===0) { %>
+              <tr>
+                <td colspan="6" style="text-align: center; color: gray;">No verified documents found.</td>
+              </tr>
+              <% } else { %>
+                <% documents.forEach(doc=> { %>
+                  <tr>
+                    <td>
+                      <%= doc.studentId %>
+                    </td>
+                    <td>
+                      <%= doc.studentName %>
+                    </td>
+                    <td>
+                      <span class="document-type"
+                        style="background: #d4edda; color: #155724; padding: 0.25rem 0.5rem; border-radius: 4px;">
+                        <%= doc.type %>
+                      </span>
+                    </td>
+                    <td>
+                      <%= doc.title %>
+                    </td>
+                    <td>
+                      <%= doc.upload_date ? doc.upload_date.toISOString().split('T')[0] : '' %>
+                    </td>
+                    <td>
+                      <span
+                        style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">
+                        ✅ Verified
+                      </span>
+                    </td>
+                  </tr>
+                  <% }) %>
+                    <% } %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </body>

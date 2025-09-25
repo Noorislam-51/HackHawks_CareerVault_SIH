@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SPI of <%= student.studentId %></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 2rem;
+    }
+
+    .spi-container {
+      display: flex;
+      gap: 2rem;
+      /* flex-wrap: wrap; */
+    }
+
+    .spi-table {
+      flex: 1 1 50%;
+      min-width: 300px;
+    }
+
+    .spi-chart {
+      flex: 1 1 50%;
+      min-width: 300px;
+    }
+
+    h3 {
+      text-align: center;
+    }
+  </style>
+  <!-- Load Google Charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+  <div class="content-section tab-content " id="view-Spi">
+    <div class="container">
+      <h2 class="mb-4 text-center">📊 SPI for <%= student.basicDetails.fullName %></h2>
+
+      <div class="spi-container">
+        <!-- Left: Table -->
+        <div class="spi-table">
+          <% if (spi && spi.length > 0) { %>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Semester</th>
+                  <th>SPI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% spi.forEach(s => { %>
+                  <tr>
+                    <td><%= s.semester %></td>
+                    <td><%= s.spi.toFixed(2) %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          <% } else { %>
+            <p>No SPI records found for this student.</p>
+          <% } %>
+        </div>
+
+        <!-- Right: Chart -->
+        <div class="spi-chart">
+          <h3>SPI Trend Across Semesters</h3>
+          <div id="spiGoogleChart" style="width:100%; height:400px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // Pass SPI data from EJS
+    const spiData = <%- JSON.stringify(spi || []) %>;
+
+    // Load Google Charts
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      // Prepare data array: ['Semester', 'SPI']
+      const dataArray = [['Semester', 'SPI']];
+      spiData.forEach(s => {
+        dataArray.push([`Sem ${s.semester}`, Number(s.spi)]);
+      });
+
+      const data = google.visualization.arrayToDataTable(dataArray);
+
+      const options = {
+        title: 'SPI per Semester',
+        legend: { position: 'none' },
+        vAxis: { minValue: 0, maxValue: 10, title: 'SPI' },
+        hAxis: { title: 'Semester' },
+        width: '100%',
+        height: 400,
+        bar: { groupWidth: "60%" },
+        colors: ['#36A2EB']
+      };
+
+      // Use ColumnChart for vertical bars
+      const chart = new google.visualization.ColumnChart(document.getElementById('spiGoogleChart'));
+      chart.draw(data, options);
+    }
+  </script>
+</body>
+
+</html>

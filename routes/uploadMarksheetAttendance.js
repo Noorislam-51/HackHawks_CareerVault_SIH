@@ -62,7 +62,8 @@ router.post("/upload-attendance", upload.single("file"), async (req, res) => {
 /* ===========================
    📌 Upload SPI Route
    =========================== */
-router.post("/upload-spi", upload.single("file"), async (req, res) => {
+// Handle SPI upload
+router.post("/upload-spi", upload.single("spi-file"), async (req, res) => {
   try {
     const workbook = xlsx.readFile(req.file.path);
     const sheetName = workbook.SheetNames[0];
@@ -71,14 +72,17 @@ router.post("/upload-spi", upload.single("file"), async (req, res) => {
     let results = { updated: 0, notFound: [] };
 
     for (let row of data) {
-      const { studentId, semester, spi } = row; // 👈 expects studentId, semester, spi
+      const { studentId, semester, spi } = row;
       const student = await Student.findOne({ studentId });
       if (!student) {
         results.notFound.push(studentId);
         continue;
       }
 
-      let spiRecord = student.spi.find((s) => s.semester === semester);
+      let spiRecord = student.spi.find(
+        s => Number(s.semester) === Number(semester)
+      );
+
       if (!spiRecord) {
         student.spi.push({ semester, spi });
       } else {
@@ -94,14 +98,18 @@ router.post("/upload-spi", upload.single("file"), async (req, res) => {
       message: `SPI uploaded successfully. ${results.updated} records updated.`,
       notFound: results.notFound
     });
+
   } catch (err) {
     console.error(err);
-    res.status(500).send({
+    res.json({
       success: false,
-      message: "Error processing SPI file"
+      message: "Error processing SPI file",
+      notFound: []
     });
   }
 });
+
+
 
 
 module.exports = router;

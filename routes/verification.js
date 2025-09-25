@@ -141,101 +141,6 @@ router.get('/verification/pending', async (req, res) => {
 });
 
 
-// router.post('/verification/approve/:id', async (req, res) => {
-//   try {
-//     const docId = req.params.id;
-
-//     // Find pending document
-//     const pendingDoc = await PendingDocument.findById(docId);
-//     if (!pendingDoc) return res.status(404).send('Document not found');
-
-//     // Mark as approved
-//     pendingDoc.status = 'approved';
-//     await pendingDoc.save();
-
-//     // Add document to Student DB in appropriate card
-//     const student = await Student.findOne({ studentId: pendingDoc.studentId });
-//     if (!student) return res.status(404).send('Student not found');
-
-//     if (!student.cards[pendingDoc.type]) student.cards[pendingDoc.type] = [];
-
-//     student.cards[pendingDoc.type].push({
-//       title: pendingDoc.title,
-//       type: pendingDoc.type,
-//       file_url: pendingDoc.file_url,
-//       verified: true,
-//       upload_date: pendingDoc.upload_date
-//     });
-
-//     await student.save();
-
-//     res.redirect('/verification/pending');
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send('Error approving document');
-//   }
-// });
-// ---------------- APPROVE DOCUMENT ----------------
-// router.post('/verification/approve/:id', async (req, res) => {
-//   try {
-//     const docId = req.params.id;
-//     const pendingDoc = await PendingDocument.findById(docId);
-//     if (!pendingDoc) {
-//       req.flash('error', 'Document not found');
-//       return res.redirect('/verification/pending');
-//     }
-
-//     pendingDoc.status = 'approved';
-//     await pendingDoc.save();
-
-//     const student = await Student.findOne({ studentId: pendingDoc.studentId });
-//     if (student) {
-//       student.cards = student.cards || {};
-//       student.cards[pendingDoc.type] = student.cards[pendingDoc.type] || [];
-//       student.cards[pendingDoc.type].push({
-//         title: pendingDoc.title,
-//         type: pendingDoc.type,
-//         file_url: pendingDoc.file_url,
-//         verified: true,
-//         upload_date: pendingDoc.upload_date
-//       });
-//       await student.save();
-//     }
-
-//     req.flash('success', 'Document approved successfully!');
-//     res.redirect('/verification/pending');
-//   } catch (err) {
-//     console.error("Error approving document:", err);
-//     req.flash('error', 'Error approving document');
-//     res.redirect('/verification/pending');
-//   }
-// });
-
-
-
-
-// router.post('/verification/reject/:id', async (req, res) => {
-//   try {
-//     const docId = req.params.id;
-//     const pendingDoc = await PendingDocument.findById(docId);
-//     if (!pendingDoc) {
-//       req.flash('error', 'Document not found');
-//       return res.redirect('/verification/pending');
-//     }
-
-//     pendingDoc.status = 'rejected';
-//     pendingDoc.staff_comments = 'Rejected by staff';
-//     await pendingDoc.save();
-
-//     req.flash('success', 'Document rejected successfully!');
-//     res.redirect('/verification/pending');
-//   } catch (err) {
-//     console.error("Error rejecting document:", err);
-//     req.flash('error', 'Error rejecting document');
-//     res.redirect('/verification/pending');
-//   }
-// });
-
 // ---------------- APPROVE DOCUMENT ----------------
 router.post('/verification/approve/:id', async (req, res) => {
   try {
@@ -265,6 +170,9 @@ router.post('/verification/approve/:id', async (req, res) => {
       });
       await student.save();
     }
+
+    // ✅ Delete from PendingDocument after approval
+    // await PendingDocument.findByIdAndDelete(docId);
 
     req.flash('success', 'Document approved successfully!');
     res.redirect('/staff/verification/pending');
@@ -300,5 +208,74 @@ router.post('/verification/reject/:id', async (req, res) => {
   }
 });
 
+// ---------------- GET VERIFIED DOCUMENTS ----------------
+// router.get('/verification/verified', async (req, res) => {
+//   try {
+//     const search = req.query.search || '';
+//     const filter = req.query.filter || '';
+
+//     const students = await Student.find({});
+
+//     // Flatten all verified documents from all card arrays
+//     const cardKeys = [
+//       'academic_achievements',
+//       'conferences_workshops',
+//       'certifications_earned',
+//       'club_activities_volunteering',
+//       'competitions_contests',
+//       'leadership_roles_internships',
+//       'community_services',
+//       'general_supporting_documents',
+//       'others_documents'
+//     ];
+
+//     let verifiedDocs = [];
+//     students.forEach(student => {
+//       cardKeys.forEach(key => {
+//         const docs = student.cards[key] || [];
+//         docs.forEach(doc => {
+//           if (doc.verified) { // Only push verified documents
+//             verifiedDocs.push({
+//               studentId: student.studentId,
+//               studentName: student.basicDetails?.fullName || student.fullName || '',
+//               cardCategory: key,
+//               type: doc.type,
+//               title: doc.title,
+//               file_url: doc.file_url,
+//               upload_date: doc.upload_date,
+//               staff_comments: doc.staff_comments
+//             });
+//           }
+//         });
+//       });
+//     });
+
+//     // Apply search filter
+//     if (search) {
+//       verifiedDocs = verifiedDocs.filter(doc =>
+//         doc.studentId.toLowerCase().includes(search.toLowerCase()) ||
+//         doc.studentName.toLowerCase().includes(search.toLowerCase()) ||
+//         doc.title.toLowerCase().includes(search.toLowerCase())
+//       );
+//     }
+
+//     // Apply type filter
+//     if (filter) {
+//       verifiedDocs = verifiedDocs.filter(doc =>
+//         doc.type && doc.type.toLowerCase() === filter.toLowerCase()
+//       );
+//     }
+
+//     res.render('staff/verified-documents', {
+//       documents: verifiedDocs,
+//       search,
+//       filter
+//     });
+
+//   } catch (err) {
+//     console.error("Error fetching verified documents:", err);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
 module.exports = router;

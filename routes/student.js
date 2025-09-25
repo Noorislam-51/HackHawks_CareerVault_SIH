@@ -19,14 +19,17 @@ router.get('/student/edit', async (req, res, next) => {
     // Count of pending documents
     const pendingCount = pendingDocs.length;
 
-
+    // **Fetch all documents**
+    const allDocs = await PendingDocument.find({ studentId }).sort({ createdAt: -1 }).lean()
+    
     // Render EJS with student info and pending docs
     res.render('./student/studentEdit', {
       title: 'Student Dashboard',
       student: req.user,
       pendingDocs,
       pendingCount,
-      results: {}    // <-- new
+      results: {},
+      allDocs     // <-- new
     });
 
   } catch (err) {
