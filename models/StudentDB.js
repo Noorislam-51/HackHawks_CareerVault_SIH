@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const plm = require("passport-local-mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/SIH_Project");
+// mongoose.connect("mongodb://127.0.0.1:27017/SIH_Project");
 
 const documentSchema = new mongoose.Schema({
   title: { type: String, required: true, set: v => v.trim().replace(/\s+/g, "_").toLowerCase() },
