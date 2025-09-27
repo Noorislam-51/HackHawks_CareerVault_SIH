@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Upload Attendance</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div  class="content-section tab-content " id="upload-attendance">
+    <h2 class="mb-4">📊 Upload Attendance Excel</h2>
+    <form id="attendanceForm" enctype="multipart/form-data">
+      <input type="file" name="file" id="file" accept=".xlsx,.xls" required>
+      <button type="submit">Upload & Process</button>
+    </form>
+
+    <div id="responseMessage"></div>
+  </div>
+</body>
+<script>
+  const form = document.getElementById('attendanceForm');
+  const responseDiv = document.getElementById('responseMessage');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+
+    const res = await fetch('/upload-attendance', {
+      method: 'POST',
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      responseDiv.innerHTML = `<p style="color:green">${data.message}</p>`;
+      if (data.notFound.length > 0) {
+        responseDiv.innerHTML += `<p>Student IDs not found: ${data.notFound.join(', ')}</p>`;
+      }
+    } else {
+      responseDiv.innerHTML = `<p style="color:red">${data.message}</p>`;
+    }
+  });
+</script>
+
+</html>

@@ -9,7 +9,7 @@
 
 <body>
   <!-- Document Management Section -->
-  <div class="document-section">
+  <div class="content-section tab-content active" id="upload-documents">
     <h2 class="section-title">Document Management</h2>
     <p class="section-subtitle">Organize and track your academic documents</p>
 
@@ -158,7 +158,9 @@
         <div class="stat-label">Verified Documents</div>
       </div>
       <div class="overview-stat">
-        <div class="stat-value pending"><%= pendingCount %></div>
+        <div class="stat-value pending">
+          <%= pendingCount %>
+        </div>
         <div class="stat-label">Pending Review</div>
       </div>
       <div class="overview-stat">
@@ -212,7 +214,7 @@
     }
 
     function openPendingDocsModal() {
-      document.getElementById("pendingDocsModal").style.display = "flex";
+      document.getElementById("pendingDocsModal").style.display = "block";
     }
     function openDocModal(category) {
       document.getElementById('docModal').style.display = 'block';
@@ -229,6 +231,7 @@
         closeDocModal();
       }
     });
+  
   </script>
 </body>
 

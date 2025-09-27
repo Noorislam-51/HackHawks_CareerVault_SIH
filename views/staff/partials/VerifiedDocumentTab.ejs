@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="content-section tab-content active" id="verified-documents">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">✅ Verified Documents</h2>
+
+        <form method="GET" action="/verification/verified" class="search-filter">
+          <input type="text" name="search" placeholder="Search verified documents..." class="search-box"
+            value="<%= search %>">
+
+          <select name="filter" class="filter-select">
+            <option value="">Filter by type</option>
+            <option value="internship" <%=filter==='internship' ? 'selected' : '' %>>Internship Certificate</option>
+            <option value="achievement" <%=filter==='achievement' ? 'selected' : '' %>>Achievement Certificate</option>
+            <option value="project" <%=filter==='project' ? 'selected' : '' %>>Project Report</option>
+          </select>
+
+          <button type="submit">🔍</button>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Document Type</th>
+              <th>Title</th>
+              <th>Upload Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="verified-tbody">
+            <% if (documents.length===0) { %>
+              <tr>
+                <td colspan="6" style="text-align: center; color: gray;">No verified documents found.</td>
+              </tr>
+              <% } else { %>
+                <% documents.forEach(doc=> { %>
+                  <tr>
+                    <td>
+                      <%= doc.studentId %>
+                    </td>
+                    <td>
+                      <%= doc.studentName %>
+                    </td>
+                    <td>
+                      <span class="document-type"
+                        style="background: #d4edda; color: #155724; padding: 0.25rem 0.5rem; border-radius: 4px;">
+                        <%= doc.type %>
+                      </span>
+                    </td>
+                    <td>
+                      <%= doc.title %>
+                    </td>
+                    <td>
+                      <%= doc.upload_date ? doc.upload_date.toISOString().split('T')[0] : '' %>
+                    </td>
+                    <td>
+                      <span
+                        style="background: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">
+                        ✅ Verified
+                      </span>
+                    </td>
+                  </tr>
+                  <% }) %>
+                    <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

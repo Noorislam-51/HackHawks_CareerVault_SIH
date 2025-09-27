@@ -1,88 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-    <div class="content-section tab-content" id="pending-documents">
-        <div class="section-header">
-          <h2 class="section-title">⏰ Pending Documents Review</h2>
-          <div class="search-filter">
-            <form method="GET" action="/staff/verification/pending">
-              <input type="text" name="search" placeholder="Search students..." class="search-box"
-                value="<%= search || '' %>">
-              <select name="filter" class="filter-select">
-                <option value="">Filter by type</option>
-                <option value="internship" <%=filter==='internship' ? 'selected' : '' %>>Internship Certificate</option>
-                <option value="achievement" <%=filter==='achievement' ? 'selected' : '' %>>Achievement Certificate
-                </option>
-                <option value="project" <%=filter==='project' ? 'selected' : '' %>>Project Report</option>
-              </select>
-              <button type="submit">Apply</button>
-            </form>
-          </div>
-        </div>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>Document Type</th>
-                <th>Upload Date</th>
-                <th>Status</th> <!-- NEW COLUMN -->
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody id="pending-tbody">
-              <% if(documents.length===0) { %>
-                <tr>
-                  <td colspan="6" style="text-align:center;">No pending documents found.</td>
-                </tr>
-                <% } else { %>
-                  <% documents.forEach(doc=> { %>
-                    <tr>
-                      <td>
-                        <%= doc.studentId %>
-                      </td>
-                      <td>
-                        <%= doc.studentName || doc.studentId %>
-                      </td>
-                      <td>
-                        <span class="document-type">
-                          <%= doc.type %>
-                        </span>
-                      </td>
-                      <td>
-                        <%= new Date(doc.upload_date).toLocaleDateString() %>
-                      </td>
-                      <td>
-                        <% if(doc.existsInMaster) { %>
-                          <span style="color:green;">Exists in Master ✅</span>
-                          <% } else { %>
-                            <span style="color:orange;">Not in Master ⚠️</span>
-                            <% } %>
-                      </td>
-                      <td class="actions">
-                        <a href="<%= doc.file_url %>" target="_blank" class="btn btn-view">👁️</a>
-
-                        <form action="/staff/verification/approve/<%= doc._id %>" method="POST" style="display:inline;">
-                          <button class="btn btn-approve">✅ Approve</button>
-                        </form>
-
-                        <form action="/staff/verification/reject/<%= doc._id %>" method="POST" style="display:inline;">
-                          <button class="btn btn-reject">❌ Reject</button>
-                        </form>
-                      </td>
-                    </tr>
-                    <% }) %>
-                      <% } %>
-            </tbody>
-          </table>
-        </div>
+  <div class="content-section tab-content" id="pending-documents">
+    <div class="section-header">
+      <h2 class="section-title">⏰ Pending Documents Review</h2>
+      <div class="search-filter">
+        <form method="GET" action="/staff/verification/pending">
+          <input type="text" name="search" placeholder="Search students..." class="search-box"
+            value="<%= search || '' %>">
+          <select name="filter" class="filter-select">
+            <option value="">Filter by type</option>
+            <option value="internship" <%=filter==='internship' ? 'selected' : '' %>>Internship Certificate</option>
+            <option value="achievement" <%=filter==='achievement' ? 'selected' : '' %>>Achievement Certificate
+            </option>
+            <option value="project" <%=filter==='project' ? 'selected' : '' %>>Project Report</option>
+          </select>
+          <button type="submit">Apply</button>
+        </form>
       </div>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Document Type</th>
+            <th>Upload Date</th>
+            <th>Status</th> <!-- NEW COLUMN -->
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="pending-tbody">
+          <% if(documents.length===0) { %>
+            <tr>
+              <td colspan="6" style="text-align:center;">No pending documents found.</td>
+            </tr>
+            <% } else { %>
+              <% documents.forEach(doc=> { %>
+                <tr>
+                  <td>
+                    <%= doc.studentId %>
+                  </td>
+                  <td>
+                    <%= doc.studentName || doc.studentId %>
+                  </td>
+                  <td>
+                      <%= doc.title %>
+                    </td>
+                  <td>
+                    <span class="document-type">
+                      <%= doc.type %>
+                    </span>
+                  </td>
+                  <td>
+                    <%= new Date(doc.upload_date).toLocaleDateString() %>
+                  </td>
+                  <td>
+                    <% if(doc.existsInMaster) { %>
+                      <span style="color:green;">Exists in Master ✅</span>
+                      <% } else { %>
+                        <span style="color:orange;">Not in Master ⚠️</span>
+                        <% } %>
+                  </td>
+                  <td class="actions">
+                    <a href="<%= doc.file_url %>" target="_blank" class="btn btn-view">👁️</a>
+
+                    <form action="/staff/verification/approve/<%= doc._id %>" method="POST" style="display:inline;">
+                      <button class="btn btn-approve">✅ Approve</button>
+                    </form>
+
+                    <form action="/staff/verification/reject/<%= doc._id %>" method="POST" style="display:inline;">
+                      <button class="btn btn-reject">❌ Reject</button>
+                    </form>
+                  </td>
+                </tr>
+                <% }) %>
+                  <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </body>
+
 </html>

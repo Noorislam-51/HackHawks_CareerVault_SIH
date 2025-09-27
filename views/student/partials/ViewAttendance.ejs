@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Attendance of <%= student.studentId %></title>
+  <style>
+   
+    .attendance-container {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .attendance-table {
+      flex: 1 1 50%;
+      min-width: 300px;
+    }
+
+    .attendance-chart {
+      flex: 1 1 50%;
+      min-width: 300px;
+    }
+
+    h3 {
+      text-align: center;
+    }
+  </style>
+  <!-- Load Google Charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+  <div class="content-section tab-content " id="view-attendance">
+    <div class="container">
+      <h2 class="mb-4 text-center">📊 Attendance for <%= student.basicDetails.fullName %></h2>
+
+      <div class="attendance-container">
+        <!-- Left: Table -->
+        <div class="attendance-table">
+          <% if (attendance && attendance.length > 0) { %>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>Present Days</th>
+                  <th>Total Days</th>
+                  <th>Attendance %</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% attendance.forEach(a => { %>
+                  <tr>
+                    <td><%= a.month %></td>
+                    <td><%= a.presentDays %></td>
+                    <td><%= a.totalDays %></td>
+                    <td><%= ((a.presentDays / a.totalDays) * 100).toFixed(2) %> %</td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          <% } else { %>
+            <p>No attendance records found for this student.</p>
+          <% } %>
+        </div>
+
+        <!-- Right: Donut Chart -->
+        <div class="attendance-chart">
+          <h3>Attendance Distribution</h3>
+          <div id="attendanceDonutChart" style="width:100%; height:400px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // Pass attendance data from EJS
+    const attendanceData = JSON.parse('<%- JSON.stringify(attendance || []) %>');
+
+    // Load Google Charts
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      // Prepare data: ['Month', 'Present Days']
+      const dataArray = [['Month', 'Present Days']];
+      attendanceData.forEach(a => {
+        dataArray.push([a.month, Number(a.presentDays)]);
+      });
+
+      const data = google.visualization.arrayToDataTable(dataArray);
+
+      const options = {
+        title: 'Attendance Distribution',
+        pieHole: 0.4, // makes it a donut chart
+        legend: { position: 'bottom' },
+        slices: attendanceData.map((a, i) => ({ offset: 0 })), // optional: add offsets per slice
+        width: '100%',
+        height: 400
+      };
+
+      const chart = new google.visualization.PieChart(document.getElementById('attendanceDonutChart'));
+      chart.draw(data, options);
+    }
+  </script>
+</body>
+
+</html>

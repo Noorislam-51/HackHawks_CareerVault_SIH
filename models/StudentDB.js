@@ -12,6 +12,16 @@ const documentSchema = new mongoose.Schema({
   staff_comments: { type: String, default: "" }
 });
 
+const attendanceSchema = new mongoose.Schema({
+  month: { type: String, required: true }, // format: "2025-09"
+  totalDays: { type: Number, default: 0 },
+  presentDays: { type: Number, default: 0 }
+});
+// ✅ New SPI Schema
+const spiSchema = new mongoose.Schema({
+  semester: { type: Number, required: true },
+  spi: { type: Number, required: true }
+});
 const cardsSchema = new mongoose.Schema({
   academic_achievements: [documentSchema],
   conferences_workshops: [documentSchema],
@@ -29,8 +39,8 @@ const studentSchema = new mongoose.Schema({
   collegeId: { type: String, required: true },
   email: { type: String, required: true, unique: true, lowercase: true },
   basicDetails: {
-    fullName: { 
-      type: String, required: true, 
+    fullName: {
+      type: String, required: true,
       set: v => v.trim().split(/\s+/).map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ")
     },
     dob: { type: Date },
@@ -40,7 +50,10 @@ const studentSchema = new mongoose.Schema({
     address: { type: String }
   },
   skills: { type: [String], default: [] },
-  cards: { type: cardsSchema, default: {} }
+  cards: { type: cardsSchema, default: {} },
+  spi: { type: [spiSchema], default: [] },
+  attendance: { type: [attendanceSchema], default: [] }
+
 }, { timestamps: true });
 
 studentSchema.plugin(plm, { usernameField: 'studentId' });
