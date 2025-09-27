@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Platform - Centralized Digital Records</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">SIH CareerVault</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About</a>
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition duration-300">Features</a>
+                    <a href="#benefits" class="text-gray-600 hover:text-blue-600 transition duration-300">Benefits</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="/login/staff" class="text-gray-600 hover:text-blue-600 transition duration-300">Staff Login</a>
+                    <a href="/login/student" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Student Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="floating-element absolute top-20 right-20 w-32 h-32 bg-white bg-opacity-10 rounded-full"></div>
+            <div class="floating-element absolute bottom-20 left-20 w-24 h-24 bg-white bg-opacity-10 rounded-full" style="animation-delay: -2s;"></div>
+            <div class="floating-element absolute top-40 left-1/3 w-16 h-16 bg-white bg-opacity-10 rounded-full" style="animation-delay: -4s;"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                    Centralised Digital<br>
+                    Platform for <span class="text-yellow-300">Student<br>Records</span>
+                </h1>
+                <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+                    One place to manage, verify, and showcase academic achievements
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="/login/student" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">
+                        Student Login / Signup
+                    </a>
+                    <a href="/login/staff" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+                        Staff Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-6">About Our Platform</h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Our platform centralises student records, making it easy for students to build verified 
+                        portfolios and staff to validate achievements. We bridge the gap between academic 
+                        accomplishments and professional opportunities through secure, verified digital credentials.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-4 bg-blue-50 rounded-xl">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">10K+</div>
+                            <div class="text-gray-600">Active Students</div>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-xl">
+                            <div class="text-3xl font-bold text-green-600 mb-2">500+</div>
+                            <div class="text-gray-600">Institutions</div>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-xl">
+                            <div class="text-3xl font-bold text-purple-600 mb-2">1M+</div>
+                            <div class="text-gray-600">Documents Secured</div>
+                        </div>
+                        <div class="text-center p-4 bg-orange-50 rounded-xl">
+                            <div class="text-3xl font-bold text-orange-600 mb-2">99.9%</div>
+                            <div class="text-gray-600">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-gradient-to-r from-blue-100 to-purple-100 rounded-2xl p-8">
+                        <img src="/images/platform-overview.png" 
+                             alt="Platform Overview" 
+                             class="w-full h-80 object-cover rounded-xl shadow-lg bg-white"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-80 bg-gradient-to-br from-blue-200 to-purple-200 rounded-xl shadow-lg hidden items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-university text-blue-500 text-6xl mb-6"></i>
+                                <p class="text-blue-700 font-bold text-xl mb-2">Digital Academic Records</p>
+                                <p class="text-blue-600">Secure • Verified • Accessible</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating elements for visual appeal -->
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-yellow-200 rounded-full opacity-60 floating-element"></div>
+                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-pink-200 rounded-full opacity-60 floating-element" style="animation-delay: -3s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-6">Platform Features</h2>
+                <p class="text-lg text-gray-600">Everything you need to manage and showcase your academic achievements</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Document Management -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-file-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Document Management</h3>
+                    <p class="text-gray-600">Securely store and organize all academic documents in one centralized location.</p>
+                </div>
+                
+                <!-- Verified Profiles -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-user-check text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Verified Student Profiles</h3>
+                    <p class="text-gray-600">Build trust with verified academic achievements and credentials.</p>
+                </div>
+                
+                <!-- Community Showcase -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Community Showcase</h3>
+                    <p class="text-gray-600">Connect with peers and showcase your academic journey to the world.</p>
+                </div>
+                
+                <!-- AI Guidance -->
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-orange-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">AI-driven Guidance</h3>
+                    <p class="text-gray-600">Get personalized recommendations for your academic and career path.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Previews Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-6">Platform Preview</h2>
+                <p class="text-lg text-gray-600">See what our platform looks like for students and staff</p>
+            </div>
+
+            <!-- Student Dashboard Preview -->
+            <div class="mb-20">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-user-graduate text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-3xl font-bold text-gray-800">Student Dashboard</h3>
+                            </div>
+                            <p class="text-lg text-gray-600 mb-6">
+                                A comprehensive dashboard where students can manage their academic records, 
+                                view achievements, and track their progress.
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-blue-600 mr-3"></i>
+                                    <span class="text-gray-700">Personal portfolio builder</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-blue-600 mr-3"></i>
+                                    <span class="text-gray-700">Achievement timeline</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-blue-600 mr-3"></i>
+                                    <span class="text-gray-700">Document upload & management</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-blue-600 mr-3"></i>
+                                    <span class="text-gray-700">Progress analytics</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="relative">
+                            <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+                                <div class="bg-blue-600 p-4 flex items-center">
+                                    <div class="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
+                                    <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
+                                    <div class="w-3 h-3 bg-green-400 rounded-full mr-4"></div>
+                                    <span class="text-white text-sm font-medium">Student Dashboard</span>
+                                </div>
+                                <div class="p-6">
+                                    <img src="/images/student-dashboard-preview.png" 
+                                         alt="Student Dashboard Preview" 
+                                         class="w-full h-64 object-cover rounded-lg bg-gray-100"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="w-full h-64 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg hidden items-center justify-center">
+                                        <div class="text-center">
+                                            <i class="fas fa-image text-blue-400 text-4xl mb-4"></i>
+                                            <p class="text-blue-600 font-medium">Student Dashboard Preview</p>
+                                            <p class="text-blue-500 text-sm mt-2">Portfolio • Achievements • Progress</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Dashboard Preview -->
+            <div>
+                <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-3xl p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="order-2 lg:order-1 relative">
+                            <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+                                <div class="bg-orange-600 p-4 flex items-center">
+                                    <div class="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
+                                    <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
+                                    <div class="w-3 h-3 bg-green-400 rounded-full mr-4"></div>
+                                    <span class="text-white text-sm font-medium">Staff Dashboard</span>
+                                </div>
+                                <div class="p-6">
+                                    <img src="/images/staff-dashboard-preview.png" 
+                                         alt="Staff Dashboard Preview" 
+                                         class="w-full h-64 object-cover rounded-lg bg-gray-100"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="w-full h-64 bg-gradient-to-br from-orange-100 to-yellow-200 rounded-lg hidden items-center justify-center">
+                                        <div class="text-center">
+                                            <i class="fas fa-chart-bar text-orange-500 text-4xl mb-4"></i>
+                                            <p class="text-orange-600 font-medium">Staff Dashboard Preview</p>
+                                            <p class="text-orange-500 text-sm mt-2">Analytics • Verification • Reports</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-chalkboard-teacher text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-3xl font-bold text-gray-800">Staff Dashboard</h3>
+                            </div>
+                            <p class="text-lg text-gray-600 mb-6">
+                                Powerful administrative tools for staff to manage student records, 
+                                verify achievements, and generate comprehensive reports.
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-orange-600 mr-3"></i>
+                                    <span class="text-gray-700">Student verification system</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-orange-600 mr-3"></i>
+                                    <span class="text-gray-700">Bulk achievement validation</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-orange-600 mr-3"></i>
+                                    <span class="text-gray-700">Advanced analytics & reports</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-orange-600 mr-3"></i>
+                                    <span class="text-gray-700">Institution management tools</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-6">Benefits for Everyone</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- For Students -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-2xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-user-graduate text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">For Students</h3>
+                    </div>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Create a comprehensive verified portfolio of your academic achievements</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Share your credentials with employers and institutions instantly</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Get AI-powered guidance for academic and career planning</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Connect with peers and showcase your journey</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- For Staff -->
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 p-8 rounded-2xl">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-chalkboard-teacher text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">For Staff</h3>
+                    </div>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Streamline the verification and validation of student achievements</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Reduce administrative overhead with automated systems</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Monitor student progress and provide targeted support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-yellow-600 mt-1 mr-3"></i>
+                            <span class="text-gray-700">Generate comprehensive reports and analytics</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="gradient-bg py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Ready to Get Started?</h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+                Join thousands of students and institutions already using our platform to 
+                manage and showcase academic achievements.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="/login/student" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">
+                    Student Login / Signup
+                </a>
+                <a href="/login/staff" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+                    Staff Login
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold">Student Platform</span>
+                </div>
+                
+                <div class="text-sm text-gray-400">
+                    © 2024 Student Platform. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scrolling Script -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

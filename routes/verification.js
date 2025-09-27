@@ -133,7 +133,7 @@ router.get('/verification/pending', async (req, res) => {
     );
 
     // Render staff dashboard
-    res.render('staff/dashboard', { documents, search, filter });
+    res.render('staff/dashboard', { documents, search, filter, userType: 'staff' });
   } catch (err) {
     console.error("Error fetching pending documents:", err);
     res.status(500).send('Server Error');
@@ -171,8 +171,7 @@ router.post('/verification/approve/:id', async (req, res) => {
       await student.save();
     }
 
-    // ✅ Delete from PendingDocument after approval
-    // await PendingDocument.findByIdAndDelete(docId);
+
 
     req.flash('success', 'Document approved successfully!');
     res.redirect('/staff/verification/pending');

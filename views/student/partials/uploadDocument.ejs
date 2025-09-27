@@ -4,234 +4,589 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Document Management - DocuVault</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#8B5CF6',
+            accent: '#10B981',
+            dark: '#1F2937',
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-up': 'slideUp 0.3s ease-out',
+            'scale-in': 'scaleIn 0.2s ease-out',
+            'bounce-light': 'bounce 2s infinite',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .glass-effect {
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .gradient-border {
+      background: linear-gradient(white, white) padding-box,
+        linear-gradient(135deg, #667eea, #764ba2) border-box;
+      border: 2px solid transparent;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 min-h-screen">
   <!-- Document Management Section -->
-  <div class="content-section tab-content active" id="upload-documents">
-    <h2 class="section-title">Document Management</h2>
-    <p class="section-subtitle">Organize and track your academic documents</p>
+  <div class="content-section tab-content active max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" id="upload-documents">
+    <!-- Header Section -->
+    <div class="text-center mb-12 animate-fade-in">
+      <div
+        class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-4">
+        <i class="fas fa-folder-open text-2xl text-white"></i>
+      </div>
+      <h2 class="text-4xl font-bold text-gray-900 mb-3">Document Management</h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Organize and track your academic documents with our comprehensive management system
+      </p>
+    </div>
 
-    <div class="document-grid">
-
+    <!-- Document Categories Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
       <!-- 1. Academic Achievements -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('academic_achievements')">👁️</div>
-        <!-- <div class="view-icon">👁️</div> -->
-        <div class="doc-header">
-          <div class="doc-icon academic">📚</div>
-          <div class="doc-title">Academic</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+              <i class="fas fa-graduation-cap text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Academic</h3>
+          </div>
+
+
+
+          <p class="text-sm text-gray-600 mb-4">Mark sheets, Degree, Merit, Research</p>
+
+          <button onclick="openDocModal('academic_achievements')"
+            class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">5</span><span class="yellow">2</span><span class="red">1</span></div>
-        <div class="doc-subtypes"><span>Mark sheets, Degree, Merit, Research</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('academic_achievements')">➕ Add</button>
       </div>
 
       <!-- 2. Conferences & Workshops -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('conferences_workshops')">👁️</div>
-        <div class="doc-header">
-          <div class="doc-icon conferences">🎤</div>
-          <div class="doc-title">Conferences</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center">
+              <i class="fas fa-microphone text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Conferences</h3>
+          </div>
+
+
+
+          <p class="text-sm text-gray-600 mb-4">Participation, Presentation, Attendance</p>
+
+          <button onclick="openDocModal('conferences_workshops')"
+            class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
-        <div class="doc-subtypes"><span>Participation, Presentation, Attendance</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('conferences_workshops')">➕ Add</button>
       </div>
 
       <!-- 3. Certifications Earned -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('certifications_earned')">👁️</div>
-        <div class="doc-header">
-          <div class="doc-icon certificates">🏆</div>
-          <div class="doc-title">Certificates</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center">
+              <i class="fas fa-trophy text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Certificates</h3>
+          </div>
+
+
+
+          <p class="text-sm text-gray-600 mb-4">Online, Industry, Skill</p>
+
+          <button onclick="openDocModal('certifications_earned')"
+            class="w-full bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">6</span><span class="yellow">1</span><span class="red">0</span></div>
-        <div class="doc-subtypes"><span>Online, Industry, Skill</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('certifications_earned')">➕ Add</button>
       </div>
 
       <!-- 4. Club Activities & Volunteering -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('club_activities_volunteering')">👁️</div>
-        <div class="doc-header">
-          <div class="doc-icon extracurricular">🎯</div>
-          <div class="doc-title">Clubs & Volunteering</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+              <i class="fas fa-users text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Clubs & Volunteering</h3>
+          </div>
+
+
+          <p class="text-sm text-gray-600 mb-4">Participation, Volunteering, Letters</p>
+
+          <button onclick="openDocModal('club_activities_volunteering')"
+            class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">2</span><span class="yellow">0</span><span class="red">1</span></div>
-        <div class="doc-subtypes"><span>Participation, Volunteering, Letters</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('club_activities_volunteering')">➕ Add</button>
       </div>
 
       <!-- 5. Competitions & Contests -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('competitions_contests')">👁️</div>
-        <div class="doc-header">
-          <div class="doc-icon competitions">🏅</div>
-          <div class="doc-title">Competitions</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center">
+              <i class="fas fa-medal text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Competitions</h3>
+          </div>
+
+
+
+          <p class="text-sm text-gray-600 mb-4">Participation, Medals, News</p>
+
+          <button onclick="openDocModal('competitions_contests')"
+            class="w-full bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
-        <div class="doc-subtypes"><span>Participation, Medals, News</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('competitions_contests')">➕ Add</button>
       </div>
 
       <!-- 6. Leadership Roles & Internships -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('leadership_roles_internships')">👁️</div>
-        <div class="doc-header">
-          <div class="doc-icon internships">🏢</div>
-          <div class="doc-title">Leadership & Internships</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <i class="fas fa-building text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Leadership & Internships</h3>
+          </div>
+
+
+
+          <p class="text-sm text-gray-600 mb-4">Appointments, Internships, Recommendations</p>
+
+          <button onclick="openDocModal('leadership_roles_internships')"
+            class="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">3</span><span class="yellow">1</span><span class="red">0</span></div>
-        <div class="doc-subtypes"><span>Appointments, Internships, Recommendations</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('leadership_roles_internships')">➕ Add</button>
       </div>
 
       <!-- 7. Community Services -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('community_services')">👁️</div>
-        <div class="doc-header">
-          <div class="doc-icon community">🤝</div>
-          <div class="doc-title">Community</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-xl flex items-center justify-center">
+              <i class="fas fa-hands-helping text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Community</h3>
+          </div>
+
+
+
+          <p class="text-sm text-gray-600 mb-4">Certificates, Appreciation, Proofs</p>
+
+          <button onclick="openDocModal('community_services')"
+            class="w-full bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
-        <div class="doc-subtypes"><span>Certificates, Appreciation, Proofs</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('community_services')">➕ Add</button>
       </div>
 
       <!-- 8. General Supporting Documents -->
-      <div class="doc-card">
-        <div class="view-icon" onclick="openPendingDocsModal('general_supporting_documents')">👁️</div>
-        <div class="doc-header">
-          <div class="doc-icon general">🗂️</div>
-          <div class="doc-title">Supporting Docs</div>
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover group">
+        <div class="relative p-6">
+
+
+          <div class="flex items-center space-x-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-r from-gray-500 to-gray-700 rounded-xl flex items-center justify-center">
+              <i class="fas fa-folder text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Supporting Docs</h3>
+          </div>
+
+
+
+          <p class="text-sm text-gray-600 mb-4">Resume, ID, Recommendation</p>
+
+          <button onclick="openDocModal('general_supporting_documents')"
+            class="w-full bg-gradient-to-r from-gray-500 to-gray-700 hover:from-gray-600 hover:to-gray-800 text-white py-3 px-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus"></i>
+            <span>Add Document</span>
+          </button>
         </div>
-        <div class="doc-stats"><span class="green">0</span><span class="yellow">0</span><span class="red">0</span></div>
-        <div class="doc-subtypes"><span>Resume, ID, Recommendation</span></div>
-        <button class="add-doc-btn" onclick="openDocModal('general_supporting_documents')">➕ Add</button>
       </div>
-
     </div>
+  </div>
 
-    <!-- Upload Document Modal -->
-    <div class="modal-overlay" id="docModal">
-      <div class="modal">
-        <div class="modal-header">
-          <h2 class="modal-title">Upload Document</h2>
-          <button class="close-btn" onclick="closeDocModal()">×</button>
+  <!-- Upload Document Modal -->
+  <div id="docModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md animate-scale-in">
+        <div class="sticky top-0 bg-white border-b border-gray-200 px-8 py-6 rounded-t-3xl">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900">Upload Document</h2>
+              <p class="text-gray-600 mt-1">Add a new document to your collection</p>
+            </div>
+            <button onclick="closeDocModal()"
+              class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
+              <i class="fas fa-times text-gray-600"></i>
+            </button>
+          </div>
         </div>
 
-        <form action="/upload-doc" method="POST" enctype="multipart/form-data">
-          <!-- Student ID -->
+        <form action="/upload-doc" method="POST" enctype="multipart/form-data" class="p-8">
+           <!-- Student ID -->
           <input type="hidden" name="studentId" value="<%= student.studentId %>">
 
           <!-- Category maps to "type" field in PendingDocument -->
           <input type="hidden" id="categoryInput" name="type">
 
-          <!-- Title -->
-          <div class="form-group">
-            <label for="title">Document Title</label>
-            <input type="text" name="title" id="title" required>
+
+          <!-- Document Title -->
+          <div class="mb-6">
+            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Document Title</label>
+            <input type="text" name="title" id="title" required
+              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              placeholder="Enter document title">
           </div>
 
           <!-- File Upload -->
-          <div class="form-group">
-            <label for="file">Upload File</label>
-            <input type="file" name="file" id="file" accept=".pdf" required>
+          <div class="mb-8">
+            <label for="file" class="block text-sm font-medium text-gray-700 mb-2">Upload File</label>
+            <div class="relative">
+              <input type="file" name="file" id="file" accept=".pdf" required class="hidden"
+                onchange="updateFileName(this)">
+              <label for="file"
+                class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                  <p class="text-sm text-gray-500">
+                    <span class="font-semibold">Click to upload</span> or drag and drop
+                  </p>
+                  <p class="text-xs text-gray-500">PDF, DOC, DOCX, JPG, PNG (MAX. 10MB)</p>
+                </div>
+              </label>
+              <div id="fileName" class="mt-2 text-sm text-gray-600 hidden"></div>
+            </div>
           </div>
 
-          <!-- Modal Actions -->
-          <div class="modal-actions">
-            <button type="button" class="btn-cancel" onclick="closeDocModal()">Cancel</button>
-            <button type="submit" class="btn-save">Upload</button>
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button type="button" onclick="closeDocModal()"
+              class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-semibold transition-colors">
+              Cancel
+            </button>
+            <button type="submit"
+              class="flex-1 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2">
+              <i class="fas fa-upload"></i>
+              <span>Upload</span>
+            </button>
           </div>
         </form>
       </div>
     </div>
+  </div>
 
-
-    <!-- Overview Statistics -->
-    <div class="overview-stats">
-      <div class="overview-stat">
-        <div class="stat-value verified">16</div>
-        <div class="stat-label">Verified Documents</div>
-      </div>
-      <div class="overview-stat">
-        <div class="stat-value pending">
-          <%= pendingCount %>
+  <!-- Overview Statistics -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-fade-in">
+    <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-3xl font-bold text-green-600 mb-1">16</div>
+          <div class="text-sm font-medium text-gray-500">Verified Documents</div>
         </div>
-        <div class="stat-label">Pending Review</div>
+        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+          <i class="fas fa-check-circle text-green-600 text-xl"></i>
+        </div>
       </div>
-      <div class="overview-stat">
-        <div class="stat-value total">20</div>
-        <div class="stat-label">Total Documents</div>
+      <div class="mt-4 bg-green-50 rounded-lg p-2">
+        <div class="w-full bg-green-200 rounded-full h-2">
+          <div class="bg-green-600 h-2 rounded-full" style="width: 80%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-3xl font-bold text-yellow-600 mb-1">4</div>
+          <div class="text-sm font-medium text-gray-500">Pending Review</div>
+        </div>
+        <div class="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+          <i class="fas fa-clock text-yellow-600 text-xl"></i>
+        </div>
+      </div>
+      <div class="mt-4 bg-yellow-50 rounded-lg p-2">
+        <div class="w-full bg-yellow-200 rounded-full h-2">
+          <div class="bg-yellow-600 h-2 rounded-full" style="width: 20%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+      <div class="flex items-center justify-between">
+        <div>
+          <div class="text-3xl font-bold text-blue-600 mb-1">20</div>
+          <div class="text-sm font-medium text-gray-500">Total Documents</div>
+        </div>
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+          <i class="fas fa-file-alt text-blue-600 text-xl"></i>
+        </div>
+      </div>
+      <div class="mt-4 bg-blue-50 rounded-lg p-2">
+        <div class="w-full bg-blue-200 rounded-full h-2">
+          <div class="bg-blue-600 h-2 rounded-full" style="width: 100%"></div>
+        </div>
       </div>
     </div>
   </div>
-
-
-  <!-- Pending Documents Modal -->
-  <div class="pending-docs-overlay" id="pendingDocsModal">
-    <div class="pending-docs-modal">
-      <div class="pending-docs-header">
-        <h2 class="pending-docs-title">Pending Documents</h2>
-        <button class="pending-docs-close-btn" onclick="closePendingDocsModal()">×</button>
-      </div>
-
-      <div class="pending-docs-container">
-        <% if (!pendingDocs || pendingDocs.length===0) { %>
-          <p class="pending-docs-no-docs">No pending documents.</p>
-          <% } else { %>
-            <% pendingDocs.map(doc=> { %>
-              <div class="pending-doc-card">
-                <div class="pending-doc-info">
-                  <h3>
-                    <%= doc.title %>
-                  </h3>
-                  <p>Type: <%= doc.type %>
-                  </p>
-                  <p>Uploaded: <%= new Date(doc.upload_date).toLocaleDateString() %>
-                  </p>
-                  <% if (doc.staff_comments) { %>
-                    <p class="pending-doc-comments">Comments: <%= doc.staff_comments %>
-                    </p>
-                    <% } %>
-                </div>
-                <a href="<%= doc.file_url %>" target="_blank" class="pending-doc-view-btn">View</a>
-              </div>
-              <% }) %>
-                <% } %>
-      </div>
-    </div>
-  </div>
-
 
 
   <script>
-    function closePendingDocsModal() {
-      document.getElementById("pendingDocsModal").style.display = "none";
-    }
-
-    function openPendingDocsModal() {
-      document.getElementById("pendingDocsModal").style.display = "block";
-    }
+    // Modal functions
     function openDocModal(category) {
-      document.getElementById('docModal').style.display = 'block';
+      document.getElementById('docModal').classList.remove('hidden');
       document.getElementById('categoryInput').value = category;
+      document.body.style.overflow = 'hidden';
     }
 
     function closeDocModal() {
-      document.getElementById('docModal').style.display = 'none';
+      document.getElementById('docModal').classList.add('hidden');
+      document.body.style.overflow = 'auto';
+      // Reset form
+      document.getElementById('title').value = '';
+      document.getElementById('file').value = '';
+      document.getElementById('fileName').classList.add('hidden');
     }
 
-    // Close modal when clicking outside
+
+
+    // File name display
+    function updateFileName(input) {
+      const fileName = document.getElementById('fileName');
+      if (input.files.length > 0) {
+        const file = input.files[0];
+        fileName.innerHTML = `
+                    <div class="flex items-center space-x-2 p-2 bg-blue-50 rounded-lg border border-blue-200">
+                        <i class="fas fa-file text-blue-600"></i>
+                        <span class="text-blue-800 font-medium">${file.name}</span>
+                        <span class="text-xs text-blue-600">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
+                    </div>
+                `;
+        fileName.classList.remove('hidden');
+      } else {
+        fileName.classList.add('hidden');
+      }
+    }
+
+    // Close modals when clicking outside
     document.getElementById('docModal').addEventListener('click', function (e) {
       if (e.target === this) {
         closeDocModal();
       }
     });
-  
+
+
+    // Enhanced drag and drop functionality
+    function setupDragDrop() {
+      const uploadArea = document.querySelector('label[for="file"]');
+
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, highlight, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        uploadArea.addEventListener(eventName, unhighlight, false);
+      });
+
+      function highlight(e) {
+        uploadArea.classList.add('border-blue-400', 'bg-blue-100');
+        uploadArea.querySelector('i').classList.add('text-blue-500');
+      }
+
+      function unhighlight(e) {
+        uploadArea.classList.remove('border-blue-400', 'bg-blue-100');
+        uploadArea.querySelector('i').classList.remove('text-blue-500');
+      }
+
+      uploadArea.addEventListener('drop', handleDrop, false);
+
+      function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        if (files.length > 0) {
+          document.getElementById('file').files = files;
+          updateFileName(document.getElementById('file'));
+        }
+      }
+    }
+
+    // Form validation and submission
+    document.querySelector('form').addEventListener('submit', function (e) {
+      const title = document.getElementById('title').value.trim();
+      const file = document.getElementById('file').files[0];
+
+      if (!title) {
+        e.preventDefault();
+        alert('Please enter a document title.');
+        return;
+      }
+
+      if (!file) {
+        e.preventDefault();
+        alert('Please select a file to upload.');
+        return;
+      }
+
+      // Check file size (10MB limit)
+      if (file.size > 10 * 1024 * 1024) {
+        e.preventDefault();
+        alert('File size must be less than 10MB.');
+        return;
+      }
+
+      // Show loading state
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalHTML = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading...';
+      submitBtn.disabled = true;
+
+      // Reset after 3 seconds (in real app, this would be handled by form submission)
+      setTimeout(() => {
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+        closeDocModal();
+      }, 3000);
+    });
+
+    // Initialize drag and drop
+    document.addEventListener('DOMContentLoaded', function () {
+      setupDragDrop();
+
+      // Add smooth transitions to all interactive elements
+      const cards = document.querySelectorAll('.card-hover');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-8px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+        });
+      });
+    });
+
+    // Simulate real-time updates
+    function updateDocumentCounts() {
+      // This would typically come from a backend API
+      const cards = document.querySelectorAll('.doc-card');
+      cards.forEach(card => {
+        const statusBadges = card.querySelectorAll('.flex.space-x-3 span');
+        // Add subtle animations for status changes
+        statusBadges.forEach(badge => {
+          badge.style.transition = 'all 0.3s ease';
+        });
+      });
+    }
+
+    // Initialize
+    updateDocumentCounts();
   </script>
 </body>
 

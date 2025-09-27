@@ -3,7 +3,7 @@ var router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn') 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('home', { title: 'DocuVault' });
 });
 
 // Student login
