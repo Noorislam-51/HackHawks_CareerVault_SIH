@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,6 +11,11 @@ var logger = require('morgan');
 const passport = require("passport");
 const flash = require('connect-flash');
 const expressSession = require("express-session");
+
+
+const connectDB = require('./config/db');
+connectDB();
+
 
 // Import routers
 var indexRouter = require('./routes/index');
@@ -18,14 +27,14 @@ const verificationRoutes = require("./routes/verification");
 const uploadMarkAttendanceRoutes = require("./routes/uploadMarksheetAttendance");
 
 // Import Student model
-const studentModel = require('./models/StudentDB'); 
+const studentModel = require('./models/StudentDB');
 const staffModel = require('./models/StaffDB');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');  
+app.set('view engine', 'ejs');
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Session + flash
