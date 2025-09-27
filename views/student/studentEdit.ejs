@@ -80,7 +80,7 @@
             <i class="fas fa-graduation-cap text-white text-xl"></i>
           </div>
           <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-           Student Portal
+            Student Portal
           </h1>
         </div>
         <div class="flex items-center space-x-4">
@@ -88,7 +88,8 @@
             <i class="fas fa-bell text-gray-600"></i>
           </button>
           <div>
-             <a href="/logout" class="px-4 py-2 bg-red-500 text-white rounded-md shadow hover:bg-red-600 transition">Logout</a>
+            <a href="/logout"
+              class="px-4 py-2 bg-red-500 text-white rounded-md shadow hover:bg-red-600 transition">Logout</a>
           </div>
         </div>
       </div>
@@ -343,18 +344,18 @@
           </div>
         </div>
 
-      <form class="p-8 space-y-6" method="POST" action="/student/edit-data">
+        <form class="p-8 space-y-6" method="POST" action="/student/edit-data">
           <!-- Row 1: Name + Student ID -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-              <input type="text"
+              <input type="text" name="fullName"
                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 value="<%= student.basicDetails?.fullName || '' %>" placeholder="Enter full name">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Roll No (Student ID)</label>
-              <input type="text"
+              <input type="text" name="studentId"
                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 value="<%= student.studentId || '' %>" placeholder="Enter roll no">
             </div>
@@ -371,16 +372,14 @@
                 <option value="AMU" <%=student.collegeId==='AMU' ? 'selected' : '' %>>Aligarh Muslim University (AMU)
                 </option>
                 <option value="DU" <%=student.collegeId==='DU' ? 'selected' : '' %>>Delhi University (DU)</option>
-                <option value="JNU" <%=student.collegeId==='JNU' ? 'selected' : '' %>>Jawaharlal Nehru University
-                  (JNU)
+                <option value="JNU" <%=student.collegeId==='JNU' ? 'selected' : '' %>>Jawaharlal Nehru University (JNU)
                 </option>
               </select>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
               <input type="date" class="form-input" id="edit-dob" name="dob"
-                value="<%= student.basicDetails?.dob ? new Date(student.basicDetails.dob).toISOString().split('T')[0] : '' %>">
-
+                value="<%= student.basicDetails?.dob ? student.basicDetails.dob.toISOString().substring(0,10) : '' %>">
             </div>
           </div>
 
@@ -404,7 +403,7 @@
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Year</label>
-              <input type="number"
+              <input type="number" name="year"
                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 value="<%= student.basicDetails?.year || '' %>" placeholder="e.g. 3">
             </div>
@@ -414,13 +413,13 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Contact Number</label>
-              <input type="text"
+              <input type="text" name="contact"
                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 value="<%= student.basicDetails?.contact || '' %>" placeholder="Enter contact number">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-              <input type="email"
+              <input type="email" name="email"
                 class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 value="<%= student.email || '' %>" placeholder="Enter email">
             </div>
@@ -429,13 +428,12 @@
           <!-- Address -->
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Address</label>
-            <textarea
+            <textarea name="address"
               class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              rows="3" placeholder=" placeholder=" Enter
-              address"><%= student.basicDetails?.address || '' %></textarea>">New Delhi, India</textarea>
+              rows="3" placeholder="Enter address"><%= student.basicDetails?.address || '' %></textarea>
           </div>
 
-          <!-- Skills Section -->
+          <!-- Skills Section (use hidden inputs for submission) -->
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Skills</label>
             <div class="flex space-x-2 mb-3">
@@ -448,27 +446,18 @@
               </button>
             </div>
             <div id="modal-skills" class="flex flex-wrap gap-2">
-              <div
-                class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
-                <span>JavaScript</span>
-                <button type="button" onclick="removeSkill(this)" class="text-blue-600 hover:text-blue-800">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-              <div
-                class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
-                <span>React</span>
-                <button type="button" onclick="removeSkill(this)" class="text-green-600 hover:text-green-800">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-              <div
-                class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
-                <span>Python</span>
-                <button type="button" onclick="removeSkill(this)" class="text-purple-600 hover:text-purple-800">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
+              <% student.skills.forEach(skill=> { %>
+                <div
+                  class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-2">
+                  <span>
+                    <%= skill %>
+                  </span>
+                  <button type="button" onclick="removeSkill(this)" class="text-blue-600 hover:text-blue-800">
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <input type="hidden" name="skills[]" value="<%= skill %>">
+                </div>
+                <% }) %>
             </div>
           </div>
 
@@ -484,6 +473,7 @@
             </button>
           </div>
         </form>
+
       </div>
     </div>
   </div>
