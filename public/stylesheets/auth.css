@@ -1,136 +1,201 @@
-   body {
-     background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
-     min-height: 100vh;
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     padding: 1rem 0;
-   }
 
-   .flip-container {
-     perspective: 1000px;
-     max-width: 500px;
-     height: 650px;
-     margin: 2rem auto;
-   }
+    /* Animated Gradient Background */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 1rem 0;
+      background: linear-gradient(-45deg, #2196f3, #1976d2, #21cbf3, #1e88e5);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
 
-   .flip-card {
-     position: relative;
-     width: 100%;
-     height: 100%;
-     transition: transform 0.6s;
-     transform-style: preserve-3d;
-   }
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
 
-   .flip-card.flipped {
-     transform: rotateY(180deg);
-   }
+      50% {
+        background-position: 100% 50%;
+      }
 
-   .flip-card-front,
-   .flip-card-back {
-     position: absolute;
-     width: 100%;
-     height: 100%;
-     backface-visibility: hidden;
-     background: rgba(255, 255, 255, 0.95);
-     border-radius: 15px;
-     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-     padding: 2rem;
-     overflow-y: auto;
-   }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
-   .flip-card-back {
-     transform: rotateY(180deg);
-   }
+    /* Back to Home Button */
+    .back-btn {
+      color: #fff;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
 
-   .back-btn {
-     color: #666;
-     text-decoration: none;
-     font-weight: 500;
-     display: inline-flex;
-     align-items: center;
-     gap: 0.5rem;
-   }
+    .back-btn:hover {
+      transform: scale(1.05);
+    }
 
-   .card-icon {
-     width: 60px;
-     height: 60px;
-     background: linear-gradient(135deg, #2196f3, #1976d2);
-     border-radius: 50%;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     font-size: 1.5rem;
-     color: white;
-     margin: 0 auto 1rem;
-   }
+    /* Flip Card Container */
+    .flip-container {
+      perspective: 1000px;
+      max-width: 500px;
+      height: 900px;
+      margin: 2rem auto;
+      position: relative;
+    }
 
-   .card-title {
-     font-weight: 600;
-     font-size: 1.6rem;
-     margin-bottom: 0.5rem;
-   }
+    .flip-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
 
-   .card-subtitle {
-     color: #666;
-     margin-bottom: 1.5rem;
-     font-size: 0.9rem;
-   }
+    .flip-card.flipped {
+      transform: rotateY(180deg);
+    }
 
-   .form-label {
-     font-weight: 500;
-     font-size: 0.9rem;
-   }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      padding: 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-   .form-control,
-   .form-select {
-     border: 1px solid #e0e0e0;
-     border-radius: 6px;
-     padding: 0.6rem;
-     font-size: 0.9rem;
-   }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
 
-   .form-control:focus,
-   .form-select:focus {
-     border-color: #2196f3;
-     box-shadow: 0 0 0 0.15rem rgba(33, 150, 243, 0.25);
-   }
+    /* Card Icon */
+    .card-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: float 3s ease-in-out infinite;
+    }
 
-   .password-input {
-     position: relative;
-   }
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
 
-   .password-toggle {
-     position: absolute;
-     right: 10px;
-     top: 50%;
-     transform: translateY(-50%);
-     background: none;
-     border: none;
-     color: #666;
-     cursor: pointer;
-   }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
 
-   .action-btn {
-     background: linear-gradient(135deg, #2196f3, #1976d2);
-     color: white;
-     border: none;
-     border-radius: 6px;
-     padding: 0.7rem 1.5rem;
-     font-weight: 600;
-     width: 100%;
-     margin-top: 1rem;
-   }
+    /* Titles & Subtitles */
+    .card-title {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #222;
+    }
 
-   .switch-link {
-     text-align: center;
-     margin-top: 1rem;
-     font-size: 0.9rem;
-   }
+    .card-subtitle {
+      color: #555;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
 
-   .switch-link button {
-     background: none;
-     border: none;
-     color: #2196f3;
-     font-weight: 500;
-     cursor: pointer;
-     text-decoration: underline;
-   }
+    /* Form Styling */
+    .form-label {
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .form-control,
+    .form-select {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.6rem;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #2196f3;
+      box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+      outline: none;
+    }
+
+    .password-input {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #666;
+      cursor: pointer;
+    }
+
+    /* Action Buttons */
+    .action-btn {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .switch-link {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .switch-link button {
+      background: none;
+      border: none;
+      color: #2196f3;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .switch-link button:hover {
+      color: #0d47a1;
+    }

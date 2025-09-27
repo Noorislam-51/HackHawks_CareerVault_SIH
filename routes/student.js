@@ -5,36 +5,34 @@ const studentModel = require('../models/StudentDB');
 const PendingDocument = require("../models/PendingDocumentDB");
 const axios = require("axios");
 
-
 router.get('/student/edit', async (req, res, next) => {
   if (!req.isAuthenticated()) {
-    return res.redirect('/login/student'); // redirect if not logged in
+    return res.redirect('/login/student');
   }
 
   try {
-    const studentId = req.user.studentId; // assuming req.user has studentId
+    const studentId = req.user.studentId;
 
-    // Fetch all pending documents for this student
+    // Fetch full student from DB
+    const student = await studentModel.findOne({ studentId }).lean();
+    if (!student) return res.redirect('/login/student');
+
     const pendingDocs = await PendingDocument.find({ studentId, status: "pending" }).lean();
-    // Count of pending documents
     const pendingCount = pendingDocs.length;
+    const allDocs = await PendingDocument.find({ studentId }).sort({ createdAt: -1 }).lean();
 
-    // **Fetch all documents**
-    const allDocs = await PendingDocument.find({ studentId }).sort({ createdAt: -1 }).lean()
-    
-    // Render EJS with student info and pending docs
     res.render('./student/studentEdit', {
       title: 'Student Dashboard',
-      student: req.user,
+      student,          // now student has basicDetails
       pendingDocs,
       pendingCount,
       results: {},
-      allDocs  ,
-      userType: 'student'   // <-- new
+      allDocs,
+      userType: 'student'
     });
 
   } catch (err) {
-    console.error("Error fetching pending docs:", err);
+    console.error("Error fetching student:", err);
     next(err);
   }
 });
