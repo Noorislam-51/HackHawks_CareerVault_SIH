@@ -30,10 +30,7 @@ The current system for managing student academic and co-curricular records is fr
 
 | Screenshot | Description |
 | :---: | :--- |
-| <img src="https://via.placeholder.com/400x250?text=Student+Dashboard" alt="Student Dashboard Preview" style="width:100%; max-width:400px; border-radius: 8px;"> | **Student Dashboard:** All verified records and achievements in one central hub. |
-| <img src="https://via.placeholder.com/400x250?text=Staff+Verification" alt="Staff Verification Preview" style="width:100%; max-width:400px; border-radius: 8px;"> | **Staff Verification Module:** Streamlined interface for record approval and verification. |
-| <img src="https://via.placeholder.com/400x250?text=AI+Recommendations" alt="AI Recommendations Preview" style="width:100%; max-width:400px; border-radius: 8px;"> | **AI-Powered Suggestions:** Personalized career and upskilling path recommendations. |
-| <img src="https://via.placeholder.com/400x250?text=Analytics+Dashboard" alt="Analytics Dashboard Preview" style="width:100%; max-width:400px; border-radius: 8px;"> | **Institutional Analytics:** Comprehensive data visualization for reporting (NAAC/NIRF). |
+| <img src="/images/preview/Home.jpg" alt="Preview 1" style="width:100%; max-width:400px; border-radius:8px;"> | <img src="/images/preview/Login.jpg" alt="Preview 2" style="width:100%; max-width:400px; border-radius:8px;"> | <img src="/images/preview/Staff.jpg" alt="Preview 3" style="width:100%; max-width:400px; border-radius:8px;"> |
 
 ---
 ## 🛠️ Technology Stack: Modern, Scalable, Secure
