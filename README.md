@@ -30,7 +30,7 @@ The current system for managing student academic and co-curricular records is fr
 
 | Screenshot | Description |
 | :---: | :--- |
-| <img src="/images/preview/Home.jpg" alt="Preview 1" style="width:100%; max-width:400px; border-radius:8px;"> | <img src="/images/preview/Login.jpg" alt="Preview 2" style="width:100%; max-width:400px; border-radius:8px;"> | <img src="/images/preview/Staff.jpg" alt="Preview 3" style="width:100%; max-width:400px; border-radius:8px;"> |
+| <img src="./public/images/preview/Home.jpg" alt="Preview 1" style="width:100%; max-width:400px; border-radius:8px;"> | <img src="./public/images/preview/Login.jpg" alt="Preview 2" style="width:100%; max-width:400px; border-radius:8px;"> | <img src="./public/images/preview/Staff.jpg" alt="Preview 3" style="width:100%; max-width:400px; border-radius:8px;"> |
 
 ---
 ## 🛠️ Technology Stack: Modern, Scalable, Secure
